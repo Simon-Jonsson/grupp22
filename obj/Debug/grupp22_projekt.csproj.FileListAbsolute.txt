@@ -1,0 +1,10 @@
+C:\Users\jakob\Documents\GitHub\grupp22\bin\Debug\grupp22_projekt.exe.config
+C:\Users\jakob\Documents\GitHub\grupp22\bin\Debug\grupp22_projekt.exe
+C:\Users\jakob\Documents\GitHub\grupp22\bin\Debug\grupp22_projekt.pdb
+C:\Users\jakob\Documents\GitHub\grupp22\obj\Debug\grupp22_projekt.csprojAssemblyReference.cache
+C:\Users\jakob\Documents\GitHub\grupp22\obj\Debug\grupp22_projekt.Form_Podcast.resources
+C:\Users\jakob\Documents\GitHub\grupp22\obj\Debug\grupp22_projekt.Properties.Resources.resources
+C:\Users\jakob\Documents\GitHub\grupp22\obj\Debug\grupp22_projekt.csproj.GenerateResource.cache
+C:\Users\jakob\Documents\GitHub\grupp22\obj\Debug\grupp22_projekt.csproj.CoreCompileInputs.cache
+C:\Users\jakob\Documents\GitHub\grupp22\obj\Debug\grupp22_projekt.exe
+C:\Users\jakob\Documents\GitHub\grupp22\obj\Debug\grupp22_projekt.pdb
