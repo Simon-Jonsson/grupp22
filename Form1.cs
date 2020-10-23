@@ -18,6 +18,18 @@ namespace grupp22_projekt
         {
             InitializeComponent();
             kategoriController = new KategoriController();
+            VisaKategori();
+        }
+
+        private void VisaKategori()
+        {
+            foreach (var item in kategoriController.GetAllKategori())
+            {
+                if (item != null)
+                {
+                    listBox_Kategori.Items.Add(item.Namn);
+                }
+            }
         }
 
         private void Ny_Kategori_Click(object sender, EventArgs e)
@@ -26,13 +38,9 @@ namespace grupp22_projekt
 
             listBox_Kategori.Items.Clear();
 
-            foreach (var item in kategoriController.GetAllKategori())
-            {
-                if (item != null)
-                {
-                    listBox_Kategori.Items.Add(item.Namn);
-                }
-            }
+            VisaKategori();
+
+            textBox_NyKategori.Clear();
         }
     }
 }
