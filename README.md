@@ -1,1 +1,1 @@
-# grupp22
+# projekt_grupp22
