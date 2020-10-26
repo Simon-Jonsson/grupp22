@@ -6,9 +6,11 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.ServiceModel.Syndication;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
 
 namespace grupp22_projekt
 {
@@ -24,6 +26,7 @@ namespace grupp22_projekt
             podcastController = new PodcastController();
             VisaKategori();
             VisaPodcasts();
+           
         }
 
         
@@ -167,6 +170,43 @@ namespace grupp22_projekt
                 RensaNyPodcast();
                 VisaPodcasts();
                     
+            }
+            else
+            {
+                MessageBox.Show("Ingen podcast vald");
+            }
+
+
+
+        }
+
+        private void GetPoddcast()
+
+        {
+            if (ListView_Podcast.SelectedItems != null)
+            {
+
+                var index = ListView_Podcast.SelectedIndices;
+                //podcastController.GetPodcastUrl(index[0]);
+                //listBox_Avsnitt.Text = podcastController.GetPodcastUrl(index[0]);
+
+            }
+            else
+            {
+                MessageBox.Show("Ingen podcast vald");
+            }
+        }
+
+        private void button_Visa_Click(object sender, EventArgs e)
+        {
+
+            if (ListView_Podcast.SelectedItems != null)
+            {
+
+                var index = ListView_Podcast.SelectedIndices;
+                //podcastController.GetPodcastUrl(index[0]);
+                listBox_Avsnitt.Text = podcastController.GetPodcastUrl();
+
             }
             else
             {

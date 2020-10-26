@@ -14,4 +14,11 @@
     <AntalAvsnitt>10</AntalAvsnitt>
     <Namn>Test</Namn>
   </Podcast>
+  <Podcast>
+    <URL>hhh</URL>
+    <Kategori>Humor</Kategori>
+    <UppdateringsIntervall>30</UppdateringsIntervall>
+    <AntalAvsnitt>10</AntalAvsnitt>
+    <Namn>apple</Namn>
+  </Podcast>
 </ArrayOfPodcast>

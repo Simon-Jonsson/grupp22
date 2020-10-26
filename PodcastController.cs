@@ -30,5 +30,9 @@ namespace grupp22_projekt
         {
             podcastRepository.Delete(index);
         }
+        public string GetPodcastUrl()
+        {
+            return podcastRepository.GetUrl();
+        }
     }
 }

@@ -52,5 +52,11 @@ namespace grupp22_projekt
             }
             SaveChanges();
         }
+
+        public string GetUrl()
+        {
+            //return podcastLista[index].URL;
+            return "test";
+        }
     }
 }

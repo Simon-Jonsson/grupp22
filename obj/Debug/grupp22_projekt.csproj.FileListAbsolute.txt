@@ -25,3 +25,13 @@ C:\Users\Simon\Documents\GitHub\grupp22\bin\Debug\Business Layer.pdb
 C:\Users\Simon\Documents\GitHub\grupp22\bin\Debug\Models.pdb
 C:\Users\Simon\Documents\GitHub\grupp22\bin\Debug\Data Access Layer.pdb
 C:\Users\Simon\Documents\GitHub\grupp22\obj\Debug\grupp22_projekt.csproj.CopyComplete
+C:\Users\Admin\Documents\GitHub\grupp22\bin\Debug\grupp22_projekt.exe.config
+C:\Users\Admin\Documents\GitHub\grupp22\bin\Debug\grupp22_projekt.exe
+C:\Users\Admin\Documents\GitHub\grupp22\bin\Debug\grupp22_projekt.pdb
+C:\Users\Admin\Documents\GitHub\grupp22\obj\Debug\grupp22_projekt.csprojAssemblyReference.cache
+C:\Users\Admin\Documents\GitHub\grupp22\obj\Debug\grupp22_projekt.Form_Podcast.resources
+C:\Users\Admin\Documents\GitHub\grupp22\obj\Debug\grupp22_projekt.Properties.Resources.resources
+C:\Users\Admin\Documents\GitHub\grupp22\obj\Debug\grupp22_projekt.csproj.GenerateResource.cache
+C:\Users\Admin\Documents\GitHub\grupp22\obj\Debug\grupp22_projekt.csproj.CoreCompileInputs.cache
+C:\Users\Admin\Documents\GitHub\grupp22\obj\Debug\grupp22_projekt.exe
+C:\Users\Admin\Documents\GitHub\grupp22\obj\Debug\grupp22_projekt.pdb

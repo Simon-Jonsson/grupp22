@@ -53,6 +53,7 @@
             this.label_Kategori_NyKategori = new System.Windows.Forms.Label();
             this.textBox_Namn = new System.Windows.Forms.TextBox();
             this.label_namn = new System.Windows.Forms.Label();
+            this.button_Visa = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // ListView_Podcast
@@ -128,9 +129,9 @@
             // 
             // Spara_Podcast
             // 
-            this.Spara_Podcast.Location = new System.Drawing.Point(199, 208);
+            this.Spara_Podcast.Location = new System.Drawing.Point(351, 208);
             this.Spara_Podcast.Name = "Spara_Podcast";
-            this.Spara_Podcast.Size = new System.Drawing.Size(199, 35);
+            this.Spara_Podcast.Size = new System.Drawing.Size(99, 35);
             this.Spara_Podcast.TabIndex = 5;
             this.Spara_Podcast.Text = "Spara";
             this.Spara_Podcast.UseVisualStyleBackColor = true;
@@ -158,9 +159,9 @@
             // 
             // TaBort_Podcast
             // 
-            this.TaBort_Podcast.Location = new System.Drawing.Point(404, 208);
+            this.TaBort_Podcast.Location = new System.Drawing.Point(474, 208);
             this.TaBort_Podcast.Name = "TaBort_Podcast";
-            this.TaBort_Podcast.Size = new System.Drawing.Size(170, 35);
+            this.TaBort_Podcast.Size = new System.Drawing.Size(100, 35);
             this.TaBort_Podcast.TabIndex = 8;
             this.TaBort_Podcast.Text = "Ta bort...";
             this.TaBort_Podcast.UseVisualStyleBackColor = true;
@@ -274,11 +275,22 @@
             this.label_namn.TabIndex = 20;
             this.label_namn.Text = "Namn";
             // 
+            // button_Visa
+            // 
+            this.button_Visa.Location = new System.Drawing.Point(225, 208);
+            this.button_Visa.Name = "button_Visa";
+            this.button_Visa.Size = new System.Drawing.Size(99, 35);
+            this.button_Visa.TabIndex = 21;
+            this.button_Visa.Text = "Visa";
+            this.button_Visa.UseVisualStyleBackColor = true;
+            this.button_Visa.Click += new System.EventHandler(this.button_Visa_Click);
+            // 
             // Form_Podcast
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(926, 419);
+            this.Controls.Add(this.button_Visa);
             this.Controls.Add(this.label_namn);
             this.Controls.Add(this.textBox_Namn);
             this.Controls.Add(this.label_Kategori_NyKategori);
@@ -334,6 +346,7 @@
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.TextBox textBox_Namn;
         private System.Windows.Forms.Label label_namn;
+        private System.Windows.Forms.Button button_Visa;
     }
 }
 
