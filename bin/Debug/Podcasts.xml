@@ -21,11 +21,4 @@
     <AntalAvsnitt>10</AntalAvsnitt>
     <Namn>Facebook</Namn>
   </Podcast>
-  <Podcast>
-    <URL>google.se</URL>
-    <Kategori>Thriller</Kategori>
-    <UppdateringsIntervall>60</UppdateringsIntervall>
-    <AntalAvsnitt>10</AntalAvsnitt>
-    <Namn>Ny</Namn>
-  </Podcast>
 </ArrayOfPodcast>
