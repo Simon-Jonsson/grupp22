@@ -10,4 +10,5 @@ namespace Data_Access_Layer.Repositories
 
         T GetByName(string name);
     }
+
 }
