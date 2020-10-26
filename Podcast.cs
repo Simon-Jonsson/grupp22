@@ -2,7 +2,7 @@
 
 namespace Models
 {
-    public class Podcast
+    public abstract class Podcast
     {
         public string URL { get; set; }
         public string Kategori { get; set; }
@@ -42,11 +42,6 @@ namespace Models
             //        i = 0;
             //        break;
             //    }
-
-        }
-
-        public Podcast()
-        {
 
         }
     }
