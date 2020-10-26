@@ -23,13 +23,6 @@
   </Podcast>
   <Podcast>
     <URL>google.se</URL>
-    <Kategori>Komedi</Kategori>
-    <UppdateringsIntervall>30</UppdateringsIntervall>
-    <AntalAvsnitt>10</AntalAvsnitt>
-    <Namn>NyIgen</Namn>
-  </Podcast>
-  <Podcast>
-    <URL>google.se</URL>
     <Kategori>Thriller</Kategori>
     <UppdateringsIntervall>60</UppdateringsIntervall>
     <AntalAvsnitt>10</AntalAvsnitt>

@@ -53,7 +53,6 @@
             this.label_Kategori_NyKategori = new System.Windows.Forms.Label();
             this.textBox_Namn = new System.Windows.Forms.TextBox();
             this.label_namn = new System.Windows.Forms.Label();
-            this.listBox1 = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // ListView_Podcast
@@ -63,6 +62,7 @@
             this.columnHeader2,
             this.columnHeader3,
             this.columnHeader4});
+            this.ListView_Podcast.FullRowSelect = true;
             this.ListView_Podcast.HideSelection = false;
             this.ListView_Podcast.Location = new System.Drawing.Point(12, 27);
             this.ListView_Podcast.Name = "ListView_Podcast";
@@ -164,6 +164,7 @@
             this.TaBort_Podcast.TabIndex = 8;
             this.TaBort_Podcast.Text = "Ta bort...";
             this.TaBort_Podcast.UseVisualStyleBackColor = true;
+            this.TaBort_Podcast.Click += new System.EventHandler(this.TaBort_Podcast_Click);
             // 
             // Ny_Kategori
             // 
@@ -273,21 +274,11 @@
             this.label_namn.TabIndex = 20;
             this.label_namn.Text = "Namn";
             // 
-            // listBox1
-            // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(976, 43);
-            this.listBox1.MultiColumn = true;
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(189, 95);
-            this.listBox1.TabIndex = 21;
-            // 
             // Form_Podcast
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1217, 419);
-            this.Controls.Add(this.listBox1);
+            this.ClientSize = new System.Drawing.Size(926, 419);
             this.Controls.Add(this.label_namn);
             this.Controls.Add(this.textBox_Namn);
             this.Controls.Add(this.label_Kategori_NyKategori);
@@ -343,7 +334,6 @@
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.TextBox textBox_Namn;
         private System.Windows.Forms.Label label_namn;
-        private System.Windows.Forms.ListBox listBox1;
     }
 }
 

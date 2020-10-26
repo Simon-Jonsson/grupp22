@@ -24,9 +24,6 @@ namespace grupp22_projekt
             podcastController = new PodcastController();
             VisaKategori();
             VisaPodcasts();
-
-            this.listBox1.ColumnWidth = 30;
-            this.listBox1.Items.AddRange(new object[] { "item 1", "column 1" });
         }
 
         
@@ -80,6 +77,7 @@ namespace grupp22_projekt
             textBox_URL.Clear();
             comboBox_UF.ResetText();
             comboBox_Kategori.ResetText();
+            ListView_Podcast.Items.Clear();
         }
 
         private void Ny_Kategori_Click(object sender, EventArgs e)
@@ -102,16 +100,17 @@ namespace grupp22_projekt
 
         private void listBox_Kategori_SelectedIndexChanged(object sender, EventArgs e)
         {
-            try
+            if (listBox_Kategori.SelectedItem != null)
             {
                 string selectedKategori = listBox_Kategori.SelectedItem.ToString();
                 textBox_NyKategori.Text = kategoriController.GetKategoriByName(selectedKategori);
-                kategoriNamn = textBox_NyKategori.Text;
             }
-            catch(Exception ex)
+            else
             {
-                Console.WriteLine(ex.Message);
+                MessageBox.Show("Ingen kategori vald");
             }
+            
+
         }
 
         private void Spara_Kategori_Click(object sender, EventArgs e)
@@ -158,5 +157,21 @@ namespace grupp22_projekt
             VisaPodcasts();
         }
 
+        private void TaBort_Podcast_Click(object sender, EventArgs e)
+        {
+            if (ListView_Podcast.SelectedItems != null)
+            {
+
+                var index = ListView_Podcast.SelectedIndices;
+                podcastController.RemovePodcast(index[0]);
+                RensaNyPodcast();
+                VisaPodcasts();
+                    
+            }
+            else
+            {
+                MessageBox.Show("Ingen podcast vald");
+            }
+        }
     }
 }

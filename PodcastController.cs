@@ -25,5 +25,10 @@ namespace grupp22_projekt
         {
             return podcastRepository.GetAll();
         }
+
+        public void RemovePodcast(int index)
+        {
+            podcastRepository.Delete(index);
+        }
     }
 }
