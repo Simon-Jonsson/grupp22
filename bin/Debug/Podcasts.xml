@@ -14,11 +14,4 @@
     <AntalAvsnitt>10</AntalAvsnitt>
     <Namn>Test</Namn>
   </Podcast>
-  <Podcast>
-    <URL>google.se</URL>
-    <Kategori>Thriller</Kategori>
-    <UppdateringsIntervall>30</UppdateringsIntervall>
-    <AntalAvsnitt>10</AntalAvsnitt>
-    <Namn>Facebook</Namn>
-  </Podcast>
 </ArrayOfPodcast>

@@ -9,7 +9,7 @@ namespace Business_Layer
     {
         IKategoriRepository<Kategori> kategoriRepository;
         public KategoriController()
-        {            
+        {
             kategoriRepository = new KategoriRepository();
         }
 
@@ -17,16 +17,31 @@ namespace Business_Layer
         {
             Kategori nyKategori = null;
 
-           
-                nyKategori = new Kategori(namn);
-                kategoriRepository.Create(nyKategori);
-            
+            nyKategori = new Kategori(namn);
+            kategoriRepository.Create(nyKategori);
 
         }
 
         public List<Kategori> GetAllKategori()
         {
             return kategoriRepository.GetAll();
+        }
+
+        public string GetKategoriByName(string namn)
+        {
+            Kategori kategori;
+            kategori = kategoriRepository.GetByName(namn);
+            return kategori.Namn;
+        }
+
+        public void RemoveKategori(int index)
+        {
+            kategoriRepository.Delete(index);
+        }
+
+        public void ChangeKategori(int index, Kategori uppdateraKategori)
+        {
+            kategoriRepository.Update(index, uppdateraKategori);
         }
     }
 }
