@@ -45,7 +45,6 @@
             this.Spara_Kategori = new System.Windows.Forms.Button();
             this.TaBort_Kategori = new System.Windows.Forms.Button();
             this.listBox_Avsnitt = new System.Windows.Forms.ListBox();
-            this.textBox_Beskrivning = new System.Windows.Forms.TextBox();
             this.label_URL = new System.Windows.Forms.Label();
             this.label_UF = new System.Windows.Forms.Label();
             this.label_Kategori_NyPodd = new System.Windows.Forms.Label();
@@ -54,6 +53,8 @@
             this.textBox_Namn = new System.Windows.Forms.TextBox();
             this.label_namn = new System.Windows.Forms.Label();
             this.button_Visa = new System.Windows.Forms.Button();
+            this.listBox_Beskrivning = new System.Windows.Forms.ListBox();
+            this.avsnittLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // ListView_Podcast
@@ -107,7 +108,6 @@
             this.textBox_NyKategori.Name = "textBox_NyKategori";
             this.textBox_NyKategori.Size = new System.Drawing.Size(307, 30);
             this.textBox_NyKategori.TabIndex = 2;
-            this.textBox_NyKategori.TextChanged += new System.EventHandler(this.textBox_NyKategori_TextChanged);
             // 
             // textBox_URL
             // 
@@ -119,7 +119,7 @@
             // 
             // Ny_Podcast
             // 
-            this.Ny_Podcast.Location = new System.Drawing.Point(12, 208);
+            this.Ny_Podcast.Location = new System.Drawing.Point(12, 215);
             this.Ny_Podcast.Name = "Ny_Podcast";
             this.Ny_Podcast.Size = new System.Drawing.Size(181, 35);
             this.Ny_Podcast.TabIndex = 4;
@@ -129,7 +129,7 @@
             // 
             // Spara_Podcast
             // 
-            this.Spara_Podcast.Location = new System.Drawing.Point(351, 208);
+            this.Spara_Podcast.Location = new System.Drawing.Point(351, 215);
             this.Spara_Podcast.Name = "Spara_Podcast";
             this.Spara_Podcast.Size = new System.Drawing.Size(99, 35);
             this.Spara_Podcast.TabIndex = 5;
@@ -138,6 +138,7 @@
             // 
             // comboBox_UF
             // 
+            this.comboBox_UF.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_UF.FormattingEnabled = true;
             this.comboBox_UF.Items.AddRange(new object[] {
             "10",
@@ -150,16 +151,16 @@
             // 
             // comboBox_Kategori
             // 
+            this.comboBox_Kategori.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_Kategori.FormattingEnabled = true;
             this.comboBox_Kategori.Location = new System.Drawing.Point(484, 182);
             this.comboBox_Kategori.Name = "comboBox_Kategori";
             this.comboBox_Kategori.Size = new System.Drawing.Size(90, 21);
             this.comboBox_Kategori.TabIndex = 7;
-            this.comboBox_Kategori.SelectedIndexChanged += new System.EventHandler(this.comboBox_Kategori_SelectedIndexChanged);
             // 
             // TaBort_Podcast
             // 
-            this.TaBort_Podcast.Location = new System.Drawing.Point(474, 208);
+            this.TaBort_Podcast.Location = new System.Drawing.Point(474, 215);
             this.TaBort_Podcast.Name = "TaBort_Podcast";
             this.TaBort_Podcast.Size = new System.Drawing.Size(100, 35);
             this.TaBort_Podcast.TabIndex = 8;
@@ -200,19 +201,11 @@
             // listBox_Avsnitt
             // 
             this.listBox_Avsnitt.FormattingEnabled = true;
-            this.listBox_Avsnitt.Location = new System.Drawing.Point(12, 270);
+            this.listBox_Avsnitt.Location = new System.Drawing.Point(12, 296);
             this.listBox_Avsnitt.Name = "listBox_Avsnitt";
-            this.listBox_Avsnitt.Size = new System.Drawing.Size(562, 134);
+            this.listBox_Avsnitt.Size = new System.Drawing.Size(562, 108);
             this.listBox_Avsnitt.TabIndex = 12;
-            // 
-            // textBox_Beskrivning
-            // 
-            this.textBox_Beskrivning.Enabled = false;
-            this.textBox_Beskrivning.Location = new System.Drawing.Point(607, 276);
-            this.textBox_Beskrivning.Multiline = true;
-            this.textBox_Beskrivning.Name = "textBox_Beskrivning";
-            this.textBox_Beskrivning.Size = new System.Drawing.Size(307, 134);
-            this.textBox_Beskrivning.TabIndex = 13;
+            this.listBox_Avsnitt.SelectedIndexChanged += new System.EventHandler(this.listBox_Avsnitt_SelectedIndexChanged);
             // 
             // label_URL
             // 
@@ -244,11 +237,11 @@
             // label_Vald_Podd
             // 
             this.label_Vald_Podd.AutoSize = true;
-            this.label_Vald_Podd.Location = new System.Drawing.Point(9, 254);
+            this.label_Vald_Podd.Location = new System.Drawing.Point(12, 270);
             this.label_Vald_Podd.Name = "label_Vald_Podd";
-            this.label_Vald_Podd.Size = new System.Drawing.Size(104, 13);
+            this.label_Vald_Podd.Size = new System.Drawing.Size(81, 13);
             this.label_Vald_Podd.TabIndex = 17;
-            this.label_Vald_Podd.Text = "Ingen podcast vald..";
+            this.label_Vald_Podd.Text = "Podcast Avsnitt";
             // 
             // label_Kategori_NyKategori
             // 
@@ -277,7 +270,7 @@
             // 
             // button_Visa
             // 
-            this.button_Visa.Location = new System.Drawing.Point(225, 208);
+            this.button_Visa.Location = new System.Drawing.Point(225, 215);
             this.button_Visa.Name = "button_Visa";
             this.button_Visa.Size = new System.Drawing.Size(99, 35);
             this.button_Visa.TabIndex = 21;
@@ -285,11 +278,32 @@
             this.button_Visa.UseVisualStyleBackColor = true;
             this.button_Visa.Click += new System.EventHandler(this.button_Visa_Click);
             // 
+            // listBox_Beskrivning
+            // 
+            this.listBox_Beskrivning.FormattingEnabled = true;
+            this.listBox_Beskrivning.HorizontalScrollbar = true;
+            this.listBox_Beskrivning.Location = new System.Drawing.Point(610, 296);
+            this.listBox_Beskrivning.Name = "listBox_Beskrivning";
+            this.listBox_Beskrivning.SelectionMode = System.Windows.Forms.SelectionMode.None;
+            this.listBox_Beskrivning.Size = new System.Drawing.Size(304, 108);
+            this.listBox_Beskrivning.TabIndex = 22;
+            // 
+            // avsnittLabel
+            // 
+            this.avsnittLabel.AutoSize = true;
+            this.avsnittLabel.Location = new System.Drawing.Point(607, 270);
+            this.avsnittLabel.Name = "avsnittLabel";
+            this.avsnittLabel.Size = new System.Drawing.Size(39, 13);
+            this.avsnittLabel.TabIndex = 23;
+            this.avsnittLabel.Text = "Avsnitt";
+            // 
             // Form_Podcast
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(926, 419);
+            this.Controls.Add(this.avsnittLabel);
+            this.Controls.Add(this.listBox_Beskrivning);
             this.Controls.Add(this.button_Visa);
             this.Controls.Add(this.label_namn);
             this.Controls.Add(this.textBox_Namn);
@@ -298,7 +312,6 @@
             this.Controls.Add(this.label_Kategori_NyPodd);
             this.Controls.Add(this.label_UF);
             this.Controls.Add(this.label_URL);
-            this.Controls.Add(this.textBox_Beskrivning);
             this.Controls.Add(this.listBox_Avsnitt);
             this.Controls.Add(this.TaBort_Kategori);
             this.Controls.Add(this.Spara_Kategori);
@@ -334,7 +347,6 @@
         private System.Windows.Forms.Button Spara_Kategori;
         private System.Windows.Forms.Button TaBort_Kategori;
         private System.Windows.Forms.ListBox listBox_Avsnitt;
-        private System.Windows.Forms.TextBox textBox_Beskrivning;
         private System.Windows.Forms.Label label_URL;
         private System.Windows.Forms.Label label_UF;
         private System.Windows.Forms.Label label_Kategori_NyPodd;
@@ -347,6 +359,8 @@
         private System.Windows.Forms.TextBox textBox_Namn;
         private System.Windows.Forms.Label label_namn;
         private System.Windows.Forms.Button button_Visa;
+        private System.Windows.Forms.ListBox listBox_Beskrivning;
+        private System.Windows.Forms.Label avsnittLabel;
     }
 }
 

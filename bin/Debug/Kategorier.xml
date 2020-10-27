@@ -6,4 +6,7 @@
   <Kategori>
     <Namn>Komedi</Namn>
   </Kategori>
+  <Kategori>
+    <Namn>Brott</Namn>
+  </Kategori>
 </ArrayOfKategori>

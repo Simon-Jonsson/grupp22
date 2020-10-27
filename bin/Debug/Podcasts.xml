@@ -8,17 +8,38 @@
     <Namn>Google</Namn>
   </Podcast>
   <Podcast>
-    <URL>google.se</URL>
+    <URL>http://joeroganexp.joerogan.libsynpro.com/rss</URL>
     <Kategori>Thriller</Kategori>
     <UppdateringsIntervall>60</UppdateringsIntervall>
     <AntalAvsnitt>10</AntalAvsnitt>
     <Namn>Test</Namn>
   </Podcast>
   <Podcast>
-    <URL>hhh</URL>
+    <URL>https://api.sr.se/api/rss/pod/itunes/3966</URL>
     <Kategori>Humor</Kategori>
     <UppdateringsIntervall>30</UppdateringsIntervall>
     <AntalAvsnitt>10</AntalAvsnitt>
     <Namn>apple</Namn>
+  </Podcast>
+  <Podcast>
+    <URL>https://feed.pod.space/filipandfredrik</URL>
+    <Kategori>Humor</Kategori>
+    <UppdateringsIntervall>60</UppdateringsIntervall>
+    <AntalAvsnitt>10</AntalAvsnitt>
+    <Namn>Hejsan</Namn>
+  </Podcast>
+  <Podcast>
+    <URL>https://rss.acast.com/mellanhimmelochjord</URL>
+    <Kategori>Humor</Kategori>
+    <UppdateringsIntervall>60</UppdateringsIntervall>
+    <AntalAvsnitt>119</AntalAvsnitt>
+    <Namn>Mellan Himmel och Jord</Namn>
+  </Podcast>
+  <Podcast>
+    <URL>https://rss.acast.com/rattegangspodden</URL>
+    <Kategori>Brott</Kategori>
+    <UppdateringsIntervall>30</UppdateringsIntervall>
+    <AntalAvsnitt>80</AntalAvsnitt>
+    <Namn>Rättegångspodden</Namn>
   </Podcast>
 </ArrayOfPodcast>

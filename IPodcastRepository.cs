@@ -10,6 +10,6 @@ namespace grupp22_projekt
 {
     interface IPodcastRepository<T> : IRepository<T> where T : Podcast
     {
-        string GetUrl();
+        string GetUrl(int index);
     }
 }

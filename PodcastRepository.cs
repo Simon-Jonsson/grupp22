@@ -53,10 +53,10 @@ namespace grupp22_projekt
             SaveChanges();
         }
 
-        public string GetUrl()
+        public string GetUrl(int index)
         {
-            //return podcastLista[index].URL;
-            return "test";
+            return podcastLista[index].URL;
         }
+
     }
 }
