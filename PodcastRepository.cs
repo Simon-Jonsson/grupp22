@@ -39,6 +39,11 @@ namespace grupp22_projekt
             return podcastListToBeReturned;
         }
 
+        public List<Podcast> GetAllByKategori(string kategori)
+        {
+            return GetAll().FindAll(p => p.Kategori.Equals(kategori));
+        }
+
         public void SaveChanges()
         {
             dataManager.SerializePodcast(podcastLista);

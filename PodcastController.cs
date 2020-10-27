@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace grupp22_projekt
 {
-    public class PodcastController
+    public class PodcastController : Validation
     {
 
         IPodcastRepository<Podcast> podcastRepository;
@@ -33,6 +33,16 @@ namespace grupp22_projekt
         public string GetPodcastUrl(int index)
         {
             return podcastRepository.GetUrl(index);
+        }
+
+        public List<Podcast> GetAllPodcastByKategori(string kategori)
+        {
+            return podcastRepository.GetAllByKategori(kategori);
+        }
+
+        public void ChangePodcast(int index, Podcast uppdateraPodcast)
+        {
+            podcastRepository.Update(index, uppdateraPodcast);
         }
     }
 }

@@ -1,11 +1,12 @@
 ﻿using Data_Access_Layer.Repositories;
+using grupp22_projekt;
 using Models;
 using System;
 using System.Collections.Generic;
 
 namespace Business_Layer
 {
-    public class KategoriController
+    public class KategoriController : Validation
     {
         IKategoriRepository<Kategori> kategoriRepository;
         public KategoriController()

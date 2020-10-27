@@ -1,45 +1,24 @@
 <?xml version="1.0"?>
 <ArrayOfPodcast xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Podcast>
-    <URL>Google.se</URL>
-    <Kategori>Humor</Kategori>
-    <UppdateringsIntervall>10</UppdateringsIntervall>
-    <AntalAvsnitt>10</AntalAvsnitt>
-    <Namn>Google</Namn>
-  </Podcast>
-  <Podcast>
-    <URL>http://joeroganexp.joerogan.libsynpro.com/rss</URL>
-    <Kategori>Thriller</Kategori>
-    <UppdateringsIntervall>60</UppdateringsIntervall>
-    <AntalAvsnitt>10</AntalAvsnitt>
-    <Namn>Test</Namn>
-  </Podcast>
-  <Podcast>
-    <URL>https://api.sr.se/api/rss/pod/itunes/3966</URL>
-    <Kategori>Humor</Kategori>
-    <UppdateringsIntervall>30</UppdateringsIntervall>
-    <AntalAvsnitt>10</AntalAvsnitt>
-    <Namn>apple</Namn>
-  </Podcast>
-  <Podcast>
-    <URL>https://feed.pod.space/filipandfredrik</URL>
-    <Kategori>Humor</Kategori>
-    <UppdateringsIntervall>60</UppdateringsIntervall>
-    <AntalAvsnitt>10</AntalAvsnitt>
-    <Namn>Hejsan</Namn>
-  </Podcast>
-  <Podcast>
-    <URL>https://rss.acast.com/mellanhimmelochjord</URL>
-    <Kategori>Humor</Kategori>
-    <UppdateringsIntervall>60</UppdateringsIntervall>
-    <AntalAvsnitt>119</AntalAvsnitt>
-    <Namn>Mellan Himmel och Jord</Namn>
-  </Podcast>
-  <Podcast>
     <URL>https://rss.acast.com/rattegangspodden</URL>
     <Kategori>Brott</Kategori>
     <UppdateringsIntervall>30</UppdateringsIntervall>
     <AntalAvsnitt>80</AntalAvsnitt>
     <Namn>Rättegångspodden</Namn>
+  </Podcast>
+  <Podcast>
+    <URL>https://feed.pod.space/filipandfredrik</URL>
+    <Kategori>Komedi</Kategori>
+    <UppdateringsIntervall>60</UppdateringsIntervall>
+    <AntalAvsnitt>552</AntalAvsnitt>
+    <Namn>Filip och Fredrik</Namn>
+  </Podcast>
+  <Podcast>
+    <URL>https://rss.acast.com/mellanhimmelochjord</URL>
+    <Kategori>Komedi</Kategori>
+    <UppdateringsIntervall>10</UppdateringsIntervall>
+    <AntalAvsnitt>119</AntalAvsnitt>
+    <Namn>Mellan Himmel och Jord</Namn>
   </Podcast>
 </ArrayOfPodcast>

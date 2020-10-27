@@ -55,6 +55,9 @@
             this.button_Visa = new System.Windows.Forms.Button();
             this.listBox_Beskrivning = new System.Windows.Forms.ListBox();
             this.avsnittLabel = new System.Windows.Forms.Label();
+            this.Sortera_Kategori = new System.Windows.Forms.Button();
+            this.label_SorteraKategori = new System.Windows.Forms.Label();
+            this.listBox_SorteradeKategorier = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // ListView_Podcast
@@ -72,6 +75,7 @@
             this.ListView_Podcast.TabIndex = 0;
             this.ListView_Podcast.UseCompatibleStateImageBehavior = false;
             this.ListView_Podcast.View = System.Windows.Forms.View.Details;
+            this.ListView_Podcast.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ListView_Podcast_MouseClick);
             // 
             // columnHeader1
             // 
@@ -97,7 +101,7 @@
             this.listBox_Kategori.FormattingEnabled = true;
             this.listBox_Kategori.Location = new System.Drawing.Point(607, 31);
             this.listBox_Kategori.Name = "listBox_Kategori";
-            this.listBox_Kategori.Size = new System.Drawing.Size(307, 121);
+            this.listBox_Kategori.Size = new System.Drawing.Size(146, 121);
             this.listBox_Kategori.TabIndex = 1;
             this.listBox_Kategori.SelectedIndexChanged += new System.EventHandler(this.listBox_Kategori_SelectedIndexChanged);
             // 
@@ -135,6 +139,7 @@
             this.Spara_Podcast.TabIndex = 5;
             this.Spara_Podcast.Text = "Spara";
             this.Spara_Podcast.UseVisualStyleBackColor = true;
+            this.Spara_Podcast.Click += new System.EventHandler(this.Spara_Podcast_Click);
             // 
             // comboBox_UF
             // 
@@ -172,7 +177,7 @@
             // 
             this.Ny_Kategori.Location = new System.Drawing.Point(607, 215);
             this.Ny_Kategori.Name = "Ny_Kategori";
-            this.Ny_Kategori.Size = new System.Drawing.Size(95, 35);
+            this.Ny_Kategori.Size = new System.Drawing.Size(71, 35);
             this.Ny_Kategori.TabIndex = 9;
             this.Ny_Kategori.Text = "Ny...";
             this.Ny_Kategori.UseVisualStyleBackColor = true;
@@ -180,9 +185,9 @@
             // 
             // Spara_Kategori
             // 
-            this.Spara_Kategori.Location = new System.Drawing.Point(713, 215);
+            this.Spara_Kategori.Location = new System.Drawing.Point(684, 215);
             this.Spara_Kategori.Name = "Spara_Kategori";
-            this.Spara_Kategori.Size = new System.Drawing.Size(95, 35);
+            this.Spara_Kategori.Size = new System.Drawing.Size(69, 35);
             this.Spara_Kategori.TabIndex = 10;
             this.Spara_Kategori.Text = "Spara";
             this.Spara_Kategori.UseVisualStyleBackColor = true;
@@ -190,9 +195,9 @@
             // 
             // TaBort_Kategori
             // 
-            this.TaBort_Kategori.Location = new System.Drawing.Point(819, 215);
+            this.TaBort_Kategori.Location = new System.Drawing.Point(838, 215);
             this.TaBort_Kategori.Name = "TaBort_Kategori";
-            this.TaBort_Kategori.Size = new System.Drawing.Size(95, 35);
+            this.TaBort_Kategori.Size = new System.Drawing.Size(76, 35);
             this.TaBort_Kategori.TabIndex = 11;
             this.TaBort_Kategori.Text = "Ta bort..";
             this.TaBort_Kategori.UseVisualStyleBackColor = true;
@@ -297,11 +302,41 @@
             this.avsnittLabel.TabIndex = 23;
             this.avsnittLabel.Text = "Avsnitt";
             // 
+            // Sortera_Kategori
+            // 
+            this.Sortera_Kategori.Location = new System.Drawing.Point(760, 215);
+            this.Sortera_Kategori.Name = "Sortera_Kategori";
+            this.Sortera_Kategori.Size = new System.Drawing.Size(72, 35);
+            this.Sortera_Kategori.TabIndex = 25;
+            this.Sortera_Kategori.Text = "Sortera";
+            this.Sortera_Kategori.UseVisualStyleBackColor = true;
+            this.Sortera_Kategori.Click += new System.EventHandler(this.Sortera_Kategori_Click);
+            // 
+            // label_SorteraKategori
+            // 
+            this.label_SorteraKategori.AutoSize = true;
+            this.label_SorteraKategori.Location = new System.Drawing.Point(759, 12);
+            this.label_SorteraKategori.Name = "label_SorteraKategori";
+            this.label_SorteraKategori.Size = new System.Drawing.Size(104, 13);
+            this.label_SorteraKategori.TabIndex = 26;
+            this.label_SorteraKategori.Text = "Sorterade Kategorier";
+            // 
+            // listBox_SorteradeKategorier
+            // 
+            this.listBox_SorteradeKategorier.FormattingEnabled = true;
+            this.listBox_SorteradeKategorier.Location = new System.Drawing.Point(762, 31);
+            this.listBox_SorteradeKategorier.Name = "listBox_SorteradeKategorier";
+            this.listBox_SorteradeKategorier.Size = new System.Drawing.Size(152, 121);
+            this.listBox_SorteradeKategorier.TabIndex = 27;
+            // 
             // Form_Podcast
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(926, 419);
+            this.Controls.Add(this.listBox_SorteradeKategorier);
+            this.Controls.Add(this.label_SorteraKategori);
+            this.Controls.Add(this.Sortera_Kategori);
             this.Controls.Add(this.avsnittLabel);
             this.Controls.Add(this.listBox_Beskrivning);
             this.Controls.Add(this.button_Visa);
@@ -361,6 +396,9 @@
         private System.Windows.Forms.Button button_Visa;
         private System.Windows.Forms.ListBox listBox_Beskrivning;
         private System.Windows.Forms.Label avsnittLabel;
+        private System.Windows.Forms.Button Sortera_Kategori;
+        private System.Windows.Forms.Label label_SorteraKategori;
+        private System.Windows.Forms.ListBox listBox_SorteradeKategorier;
     }
 }
 

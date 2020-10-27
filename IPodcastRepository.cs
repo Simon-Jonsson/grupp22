@@ -11,5 +11,6 @@ namespace grupp22_projekt
     interface IPodcastRepository<T> : IRepository<T> where T : Podcast
     {
         string GetUrl(int index);
+        List<Podcast> GetAllByKategori(string kategori);
     }
 }
