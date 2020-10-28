@@ -1,24 +1,27 @@
 <?xml version="1.0"?>
 <ArrayOfPodcast xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Podcast>
-    <URL>https://rss.acast.com/rattegangspodden</URL>
+    <URL>https://api.sr.se/api/rss/pod/itunes/3966</URL>
     <Kategori>Brott</Kategori>
-    <UppdateringsIntervall>30</UppdateringsIntervall>
-    <AntalAvsnitt>80</AntalAvsnitt>
-    <Namn>Rättegångspodden</Namn>
-  </Podcast>
-  <Podcast>
-    <URL>https://feed.pod.space/filipandfredrik</URL>
-    <Kategori>Komedi</Kategori>
-    <UppdateringsIntervall>60</UppdateringsIntervall>
-    <AntalAvsnitt>552</AntalAvsnitt>
-    <Namn>Filip och Fredrik</Namn>
-  </Podcast>
-  <Podcast>
-    <URL>https://rss.acast.com/mellanhimmelochjord</URL>
-    <Kategori>Komedi</Kategori>
     <UppdateringsIntervall>10</UppdateringsIntervall>
-    <AntalAvsnitt>119</AntalAvsnitt>
-    <Namn>Mellan Himmel och Jord</Namn>
+    <AntalAvsnitt>405</AntalAvsnitt>
+    <Namn>P3 Dokumentär</Namn>
+    <NextUpdate>2020-10-28T12:24:30.1854203+01:00</NextUpdate>
+  </Podcast>
+  <Podcast>
+    <URL>https://api.sr.se/api/rss/pod/itunes/3966</URL>
+    <Kategori>Komedi</Kategori>
+    <UppdateringsIntervall>30</UppdateringsIntervall>
+    <AntalAvsnitt>405</AntalAvsnitt>
+    <Namn>Filip och frdrik</Namn>
+    <NextUpdate>2020-10-28T13:32:01.1761566+01:00</NextUpdate>
+  </Podcast>
+  <Podcast>
+    <URL>https://api.sr.se/api/rss/pod/itunes/3966</URL>
+    <Kategori>Komedi</Kategori>
+    <UppdateringsIntervall>30</UppdateringsIntervall>
+    <AntalAvsnitt>405</AntalAvsnitt>
+    <Namn>Test 3</Namn>
+    <NextUpdate>2020-10-28T13:40:47.565751+01:00</NextUpdate>
   </Podcast>
 </ArrayOfPodcast>
