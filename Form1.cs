@@ -129,7 +129,9 @@ namespace grupp22_projekt
 
         private void Ny_Kategori_Click(object sender, EventArgs e)
         {
-                if (textBox_NyKategori.Text.Equals(""))
+            try
+            {
+                if (validation.isInputEmpty(textBox_NyKategori.Text) == true)
                 {
                     MessageBox.Show("Inget kategorinamn angivet");
                 }
@@ -140,9 +142,15 @@ namespace grupp22_projekt
                     VisaKategori();
                     textBox_NyKategori.Clear();
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
             
-            
-        }
+
+
+    }
 
         private void DeletePodcastMedKategori(string kategori)
         {
@@ -210,36 +218,35 @@ namespace grupp22_projekt
 
         private void TaBort_Kategori_Click(object sender, EventArgs e)
         {
-            
-            var confirmResult = MessageBox.Show("Vill du ta bort denna kategori och tillhörande podcasts?", "Confirm Delete", MessageBoxButtons.YesNo);
 
-
-            try 
+            try
             {
-                if (confirmResult == DialogResult.Yes)
+                if (listBox_Kategori.SelectedItem != null)
                 {
-                    if (listBox_Kategori.SelectedItem != null)
-                    { 
-                    string valdKategori = listBox_Kategori.SelectedItem.ToString();
-                    DeletePodcastMedKategori(valdKategori);
-                    kategoriController.RemoveKategori(listBox_Kategori.SelectedIndex);
-                    listBox_Kategori.Items.Clear();
-                    textBox_NyKategori.Clear();
-                    VisaKategori();
-                    RensaNyPodcast();
-                    VisaPodcasts();
-                    }
-                    else
+                    var confirmResult = MessageBox.Show("Vill du ta bort denna kategori och tillhörande podcasts?", "Confirm Delete", MessageBoxButtons.YesNo);
+                    if (confirmResult == DialogResult.Yes)
                     {
-                        MessageBox.Show("Vänligen välj en kategori att ta bort");
+                        string valdKategori = listBox_Kategori.SelectedItem.ToString();
+                        DeletePodcastMedKategori(valdKategori);
+                        kategoriController.RemoveKategori(listBox_Kategori.SelectedIndex);
+                        listBox_Kategori.Items.Clear();
+                        textBox_NyKategori.Clear();
+                        VisaKategori();
+                        RensaNyPodcast();
+                        VisaPodcasts();
+                        listBox_SorteradeKategorier.Items.Clear();
                     }
+                }
+                else
+                {
+                    MessageBox.Show("Vänligen välj en kategori att ta bort");
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Vänligen välj en kategori att ta bort");
+                MessageBox.Show(ex.Message);
             }
-            
+
         }
 
         private void Ny_Podcast_Click(object sender, EventArgs e)
@@ -254,6 +261,8 @@ namespace grupp22_projekt
                         podcastController.CreatePodcast(textBox_URL.Text, comboBox_Kategori.SelectedItem.ToString(), uppdateringsFrekvens, GetAntalAvsnitt(textBox_URL.Text), textBox_Namn.Text);
                         RensaNyPodcast();
                         VisaPodcasts();
+                        Spara_Podcast.Enabled = false;
+                        textBox_URL.Enabled = true;
                     }                      
                 }
                 else
@@ -263,7 +272,7 @@ namespace grupp22_projekt
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message + " TEST ");
             }
         }
 
@@ -283,10 +292,10 @@ namespace grupp22_projekt
                 }
 
             }
-            catch (Exception ex)
+            catch (OurExceptions ex)
             {
 
-                MessageBox.Show("Kontrollera att du har angett en giltig URL");
+                MessageBox.Show(ex.Message);
 
             }
 
@@ -298,20 +307,33 @@ namespace grupp22_projekt
 
             try
             {
-                var confirmResult = MessageBox.Show("Vill du ta bort denna podcast?", "Confirm Delete", MessageBoxButtons.YesNo);
-                    
-                if (confirmResult == DialogResult.Yes)
+                if (validation.isInputEmpty(textBox_URL.Text) == false)
+                {
+                    var confirmResult = MessageBox.Show("Vill du ta bort denna podcast?", "Vill du ta bort podcast?", MessageBoxButtons.YesNo);
+                    if (confirmResult == DialogResult.Yes)
                     {
                         var index = ListView_Podcast.SelectedIndices;
                         podcastController.RemovePodcast(index[0]);
                         RensaNyPodcast();
                         VisaPodcasts();
+                        Spara_Podcast.Enabled = false;
+                        textBox_URL.Enabled = true;
                     }
-                  
+                    else
+                    {
+                        RensaNyPodcast();
+                        VisaPodcasts();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Vänligen välj en podcast att ta bort");
+                }
+
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Vänligen välj en podcast att ta bort.");
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -377,10 +399,10 @@ namespace grupp22_projekt
             }
         }
 
-        private void GetPodcastAvsnitt()
+        private async Task GetPodcastAvsnitt()
         {
             XmlReader reader = XmlReader.Create(GetURL());
-            SyndicationFeed feed = SyndicationFeed.Load(reader);       
+            SyndicationFeed feed = await Task.Run(() => SyndicationFeed.Load(reader));
 
             foreach (SyndicationItem item in feed.Items)
             {

@@ -16,7 +16,7 @@ namespace Business_Layer
         public OurExceptions(string message) :
             base (message)
         {
-
+            this.Message = "Felmeddelande";
         }
 
         public OurExceptions(string message, Exception inner) :
@@ -25,14 +25,28 @@ namespace Business_Layer
 
         }
 
-        private string Message ()
+        public string Message { get; set; }
+ 
+
+        private string Message1()
         {
             return "Felmeddelande";
         }
 
-        public virtual string IsInputEmpty(OurExceptions ex, string input)
+        //public bool NeedsUpdate
+        //{
+        //    get
+        //    {
+        //        // Om nästa uppdatering är innan nuvarande klockslag så ska en uppdatering ske
+        //        // dvs metoden NeedsUpdate ska returnera true
+        //        return NextUpdate <= DateTime.Now;
+        //    }
+        //}
+
+
+        public virtual string IsInputEmpty(string input)
         {
-            return Message();
+            return Message1();
         }
     }
 }

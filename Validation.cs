@@ -33,14 +33,14 @@ namespace grupp22_projekt
             }
         }
 
-        public override string IsInputEmpty(OurExceptions ex, string input)
+        public override string IsInputEmpty(string input)
         {
             if (isInputEmpty(input) == true)
             {
                 return "Texten är tom";
             }
 
-            return IsInputEmpty(ex, input);
+            return IsInputEmpty(input);
         }
     }
 }
