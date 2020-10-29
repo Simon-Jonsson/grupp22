@@ -1,4 +1,5 @@
-﻿using Business_Layer;
+﻿using BL;
+using Business_Layer;
 using Models;
 using System;
 using System.Collections.Generic;
@@ -23,7 +24,8 @@ namespace grupp22_projekt
 
         KategoriController kategoriController;
         PodcastController podcastController;
-        Validation validation;
+        PodcastValidation podcastValidation;
+        KategoriValidation kategoriValidation;
        
 
         public Form_Podcast()
@@ -31,23 +33,22 @@ namespace grupp22_projekt
             InitializeComponent();
             kategoriController = new KategoriController();
             podcastController = new PodcastController();
-            validation = new Validation();
+            podcastValidation = new PodcastValidation();
+            kategoriValidation = new KategoriValidation();
 
             Spara_Podcast.Enabled = false;
+            button_Visa.Enabled = false;
             textBox_URL.Enabled = true;
 
-            VisaKategori();
-            VisaPodcasts();
-            StartaTimer();
-            AddPodcastToTimerList();
-        }
-
-        private void StartaTimer()
-        {
             timer.Interval = 1000;
             timer.Tick += Timer_Tick;
             timer.Start();
+
+            VisaKategori();
+            VisaPodcasts();
+            AddPodcastToTimerList();
         }
+
         private void AddPodcastToTimerList()
         {
             foreach (var item in podcastController.GetAllPodcasts())
@@ -131,19 +132,18 @@ namespace grupp22_projekt
         {
             try
             {
-                if (validation.isInputEmpty(textBox_NyKategori.Text) == true)
+                if (kategoriValidation.isInputEmpty(textBox_NyKategori.Text) == false)
                 {
-                    MessageBox.Show("Inget kategorinamn angivet");
-                }
-                else
-                {
-                    kategoriController.CreateKategori(textBox_NyKategori.Text);
-                    listBox_Kategori.Items.Clear();
-                    VisaKategori();
-                    textBox_NyKategori.Clear();
+                    if (kategoriValidation.isInputLetters(textBox_NyKategori.Text) == false)
+                    {
+                        kategoriController.CreateKategori(textBox_NyKategori.Text);
+                        listBox_Kategori.Items.Clear();
+                        VisaKategori();
+                        textBox_NyKategori.Clear();
+                    }
                 }
             }
-            catch (Exception ex)
+            catch (OurExceptions ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -166,53 +166,48 @@ namespace grupp22_projekt
 
         private void listBox_Kategori_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (listBox_Kategori.SelectedItem != null)
-            {
-                string selectedKategori = listBox_Kategori.SelectedItem.ToString();
-                textBox_NyKategori.Text = kategoriController.GetKategoriByName(selectedKategori); 
-            }
-            else
-            {
-                listBox_Kategori.ClearSelected();
-            }
-            
+
+                if (listBox_Kategori.SelectedItem != null)
+                {
+                    string selectedKategori = listBox_Kategori.SelectedItem.ToString();
+                    textBox_NyKategori.Text = kategoriController.GetKategoriByName(selectedKategori);
+                }
+                else
+                {
+                    listBox_Kategori.ClearSelected();
+                }    
 
         }
 
         private void Spara_Kategori_Click(object sender, EventArgs e)
         {
-            if (validation.isInputEmpty(textBox_NyKategori.Text) == false)
+            try
             {
-                if (validation.isInputLetters(textBox_NyKategori.Text) == false)
+                if (kategoriValidation.isInputEmpty(textBox_NyKategori.Text) == false)
                 {
-                    MessageBox.Show("Namnet får endast innehålla bokstäver");
-                }
-                else
-                {
-                    if (listBox_Kategori.SelectedItem != null)
+                    if (kategoriValidation.isInputLetters(textBox_NyKategori.Text) == false)
                     {
-                        Kategori bytKategoriNamn = new Kategori(textBox_NyKategori.Text);
-                        int index = listBox_Kategori.SelectedIndex;
-                        string valdKategori = listBox_Kategori.SelectedItem.ToString();
-                        kategoriController.ChangeKategori(index, bytKategoriNamn);
-                        listBox_Kategori.Items.Clear();
-                        ChangePodcastKategori(valdKategori);
-                        VisaKategori();
-                        RensaNyPodcast();
-                        VisaPodcasts();
-                        textBox_NyKategori.Clear();
-                        listBox_Kategori.ClearSelected();
-                        MessageBox.Show("Ändringarna är sparade");
-                    }
-                    else
-                    {
-                        MessageBox.Show("Vänligen välj en kategori att spara");
-                    }
+                        if (kategoriValidation.isItemNull(listBox_Kategori) == false)
+                        {
+                            Kategori bytKategoriNamn = new Kategori(textBox_NyKategori.Text);
+                            int index = listBox_Kategori.SelectedIndex;
+                            string valdKategori = listBox_Kategori.SelectedItem.ToString();
+                            kategoriController.ChangeKategori(index, bytKategoriNamn);
+                            listBox_Kategori.Items.Clear();
+                            ChangePodcastKategori(valdKategori);
+                            VisaKategori();
+                            RensaNyPodcast();
+                            VisaPodcasts();
+                            textBox_NyKategori.Clear();
+                            listBox_Kategori.ClearSelected();
+                            MessageBox.Show("Ändringarna är sparade");
+                        }
+                    }                    
                 }
             }
-            else
+            catch (OurExceptions ex)
             {
-                MessageBox.Show("Vänligen fyll i kategorinamnet");
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -221,9 +216,9 @@ namespace grupp22_projekt
 
             try
             {
-                if (listBox_Kategori.SelectedItem != null)
+                if (kategoriValidation.isItemNull(listBox_Kategori) == false)
                 {
-                    var confirmResult = MessageBox.Show("Vill du ta bort denna kategori och tillhörande podcasts?", "Confirm Delete", MessageBoxButtons.YesNo);
+                    var confirmResult = MessageBox.Show("Vill du ta bort denna kategori och tillhörande podcasts?", "Är du säker?", MessageBoxButtons.YesNo);
                     if (confirmResult == DialogResult.Yes)
                     {
                         string valdKategori = listBox_Kategori.SelectedItem.ToString();
@@ -237,12 +232,8 @@ namespace grupp22_projekt
                         listBox_SorteradeKategorier.Items.Clear();
                     }
                 }
-                else
-                {
-                    MessageBox.Show("Vänligen välj en kategori att ta bort");
-                }
             }
-            catch (Exception ex)
+            catch (OurExceptions ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -253,26 +244,29 @@ namespace grupp22_projekt
         {
             try
             {
-                if (validation.isInputEmpty(textBox_Namn.Text) == false)
+                if (podcastValidation.isInputEmpty(textBox_Namn.Text) == false)
                 {
-                    if (GetAntalAvsnitt(textBox_URL.Text) != 0)
+                    if (podcastValidation.isNotValidURL(textBox_URL.Text) == false)
                     {
-                        int uppdateringsFrekvens = int.Parse(comboBox_UF.SelectedItem.ToString());
-                        podcastController.CreatePodcast(textBox_URL.Text, comboBox_Kategori.SelectedItem.ToString(), uppdateringsFrekvens, GetAntalAvsnitt(textBox_URL.Text), textBox_Namn.Text);
-                        RensaNyPodcast();
-                        VisaPodcasts();
-                        Spara_Podcast.Enabled = false;
-                        textBox_URL.Enabled = true;
-                    }                      
-                }
-                else
-                {
-                    MessageBox.Show("Kontrollera att du har fyllt i podcastnamnet");
+                        if (podcastValidation.isUppdateringsFrekvensEmpty(comboBox_UF) == false)
+                        {
+                            if (podcastValidation.isKategoriEmpty(comboBox_Kategori) == false)
+                            {
+                                int uppdateringsFrekvens = int.Parse(comboBox_UF.SelectedItem.ToString());
+                                podcastController.CreatePodcast(textBox_URL.Text, comboBox_Kategori.SelectedItem.ToString(), uppdateringsFrekvens, GetAntalAvsnitt(textBox_URL.Text), textBox_Namn.Text);
+                                RensaNyPodcast();
+                                VisaPodcasts();
+                                Spara_Podcast.Enabled = false;
+                                button_Visa.Enabled = false;
+                                textBox_URL.Enabled = true;
+                            }
+                        }
+                    }
                 }
             }
-            catch (Exception ex)
+            catch (OurExceptions ex)
             {
-                MessageBox.Show(ex.Message + " TEST ");
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -282,21 +276,21 @@ namespace grupp22_projekt
             int antalAvsnitt = 0;
             try
             {
-               
-                XmlReader reader = XmlReader.Create(URL);
-                SyndicationFeed feed = SyndicationFeed.Load(reader);
-
-                foreach (var item in feed.Items)
+                if (podcastValidation.isNotValidURL(URL) == false)
                 {
-                    antalAvsnitt++;
+                    XmlReader reader = XmlReader.Create(URL);
+                    SyndicationFeed feed = SyndicationFeed.Load(reader);
+
+                    foreach (var item in feed.Items)
+                    {
+                        antalAvsnitt++;
+                    }
                 }
 
             }
             catch (OurExceptions ex)
             {
-
                 MessageBox.Show(ex.Message);
-
             }
 
             return antalAvsnitt;
@@ -307,9 +301,9 @@ namespace grupp22_projekt
 
             try
             {
-                if (validation.isInputEmpty(textBox_URL.Text) == false)
+                if (podcastValidation.isInputEmpty(textBox_URL.Text) == false) //Ändra till en bättre validering
                 {
-                    var confirmResult = MessageBox.Show("Vill du ta bort denna podcast?", "Vill du ta bort podcast?", MessageBoxButtons.YesNo);
+                    var confirmResult = MessageBox.Show("Vill du ta bort denna podcast?", "Är du säker?", MessageBoxButtons.YesNo);
                     if (confirmResult == DialogResult.Yes)
                     {
                         var index = ListView_Podcast.SelectedIndices;
@@ -317,6 +311,7 @@ namespace grupp22_projekt
                         RensaNyPodcast();
                         VisaPodcasts();
                         Spara_Podcast.Enabled = false;
+                        button_Visa.Enabled = false;
                         textBox_URL.Enabled = true;
                     }
                     else
@@ -325,37 +320,16 @@ namespace grupp22_projekt
                         VisaPodcasts();
                     }
                 }
-                else
-                {
-                    MessageBox.Show("Vänligen välj en podcast att ta bort");
-                }
-
             }
-            catch (Exception ex)
+            catch (OurExceptions ex)
             {
                 MessageBox.Show(ex.Message);
             }
         }
 
-        private void button_Visa_Click(object sender, EventArgs e)
+        private void button_Visa_Click(object sender, EventArgs e) //Kan vi göra en validering för listview?
         {
-            listBox_Avsnitt.Items.Clear();
-
-            try
-            {
-                if (ListView_Podcast.SelectedItems != null)
-                {
-                    GetPodcastAvsnitt();
-                }
-                else
-                {
-                    MessageBox.Show("Ingen podcast vald");
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Vänligen välj en podcast först.");
-            }
+            GetPodcastAvsnitt();
         }
 
         private string GetURL()
@@ -418,7 +392,6 @@ namespace grupp22_projekt
 
             List<string> beskrivningar = new List<string>();
 
-
             foreach (SyndicationItem item in feed.Items)
             {
                 beskrivningar.Add(item.Summary.Text);
@@ -451,44 +424,47 @@ namespace grupp22_projekt
             try
             {
                 int uppdateringsFrekvens = int.Parse(comboBox_UF.SelectedItem.ToString());
-                if (validation.isInputEmpty(textBox_Namn.Text) == false)
-                {                   
-                        Podcast ändraPodcast = new Podcast(textBox_URL.Text, comboBox_Kategori.SelectedItem.ToString(), uppdateringsFrekvens, GetAntalAvsnitt(textBox_URL.Text), textBox_Namn.Text);
-                        int index = ListView_Podcast.SelectedIndices[0];
-                        podcastController.ChangePodcast(index, ändraPodcast);
-                        RensaNyPodcast();
-                        VisaPodcasts();
-                        MessageBox.Show("Ändringarna är sparade");
-                        Spara_Podcast.Enabled = false;
-                        textBox_URL.Enabled = true;
-                }
-                else
+                if (podcastValidation.isInputEmpty(textBox_Namn.Text) == false)
                 {
-                    MessageBox.Show("Kontrollera att namn, URL, uppdateringsfrekvens och kategori är ifyllt");
+                    if (podcastValidation.isNotValidURL(textBox_URL.Text) == false)
+                    {
+                        if(podcastValidation.isUppdateringsFrekvensEmpty(comboBox_UF) == false)
+                        {
+                            if (podcastValidation.isKategoriEmpty(comboBox_Kategori) == false)
+                            {
+                                Podcast ändraPodcast = new Podcast(textBox_URL.Text, comboBox_Kategori.SelectedItem.ToString(), uppdateringsFrekvens, GetAntalAvsnitt(textBox_URL.Text), textBox_Namn.Text);
+                                int index = ListView_Podcast.SelectedIndices[0];
+                                podcastController.ChangePodcast(index, ändraPodcast);
+                                RensaNyPodcast();
+                                VisaPodcasts();
+                                MessageBox.Show("Ändringarna är sparade");
+                                Spara_Podcast.Enabled = false;
+                                button_Visa.Enabled = false;
+                                textBox_URL.Enabled = true;
+                            }  
+                        }                       
+                    }
                 }
             }
-            catch (Exception exception)
+            catch (OurExceptions ex)
             {
-                MessageBox.Show(exception.Message);
+                MessageBox.Show(ex.Message);
             }
         }
 
         private void ListView_Podcast_MouseClick(object sender, MouseEventArgs e)
         {
-            try
-            {
                 textBox_Namn.Text = ListView_Podcast.SelectedItems[0].SubItems[1].Text;
                 comboBox_UF.Text = ListView_Podcast.SelectedItems[0].SubItems[2].Text;
                 comboBox_Kategori.Text = ListView_Podcast.SelectedItems[0].SubItems[3].Text;
                 textBox_URL.Enabled = false;
                 Spara_Podcast.Enabled = true;
+                button_Visa.Enabled = true;
+                listBox_Avsnitt.Items.Clear();
+                listBox_Beskrivning.Items.Clear();
+                avsnittLabel.Text = "Avsnitt";
                 string urlText = GetURL();
                 textBox_URL.Text = urlText;
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
         }
 
         private void Sortera_Kategori_Click(object sender, EventArgs e)
@@ -496,22 +472,18 @@ namespace grupp22_projekt
             try
             {
                 listBox_SorteradeKategorier.Items.Clear();
-                if (listBox_Kategori.SelectedItem != null) 
+                if (kategoriValidation.isItemNull(listBox_Kategori) == false) 
                 {
                     GetSorteradeKategorier(listBox_Kategori.SelectedItem.ToString());
                     textBox_NyKategori.Clear();
                     listBox_Kategori.ClearSelected();
-                }
-                else
-                {
-                    MessageBox.Show("Vänligen välj en kategori att sortera");
-                }
-                
+                } 
             }
-            catch (Exception ex)
+            catch (OurExceptions ex)
             {
                 MessageBox.Show(ex.Message);
             }
         }
+
     }
 }

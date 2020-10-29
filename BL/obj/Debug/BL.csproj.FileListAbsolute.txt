@@ -1,0 +1,11 @@
+C:\Users\Simon\Documents\GitHub\grupp22\BL\obj\Debug\BL.csprojAssemblyReference.cache
+C:\Users\Simon\Documents\GitHub\grupp22\BL\obj\Debug\BL.csproj.CoreCompileInputs.cache
+C:\Users\Simon\Documents\GitHub\grupp22\BL\bin\Debug\BL.dll
+C:\Users\Simon\Documents\GitHub\grupp22\BL\bin\Debug\BL.pdb
+C:\Users\Simon\Documents\GitHub\grupp22\BL\bin\Debug\DAL.dll
+C:\Users\Simon\Documents\GitHub\grupp22\BL\bin\Debug\Models.dll
+C:\Users\Simon\Documents\GitHub\grupp22\BL\bin\Debug\DAL.pdb
+C:\Users\Simon\Documents\GitHub\grupp22\BL\bin\Debug\Models.pdb
+C:\Users\Simon\Documents\GitHub\grupp22\BL\obj\Debug\BL.csproj.CopyComplete
+C:\Users\Simon\Documents\GitHub\grupp22\BL\obj\Debug\BL.dll
+C:\Users\Simon\Documents\GitHub\grupp22\BL\obj\Debug\BL.pdb

@@ -2,7 +2,7 @@
 <ArrayOfPodcast xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Podcast>
     <URL>https://feed.pod.space/filipandfredrik</URL>
-    <Kategori>Humor</Kategori>
+    <Kategori>Komedi</Kategori>
     <UppdateringsIntervall>30</UppdateringsIntervall>
     <AntalAvsnitt>554</AntalAvsnitt>
     <Namn>Filip och Fredrik</Namn>
@@ -14,6 +14,14 @@
     <UppdateringsIntervall>10</UppdateringsIntervall>
     <AntalAvsnitt>80</AntalAvsnitt>
     <Namn>Rättegångspodden</Namn>
-    <NextUpdate>2020-10-28T17:14:04.252582+01:00</NextUpdate>
+    <NextUpdate>2020-10-29T13:37:53.8073729+01:00</NextUpdate>
+  </Podcast>
+  <Podcast>
+    <URL>https://api.sr.se/api/rss/pod/itunes/3966</URL>
+    <Kategori>Samhälle</Kategori>
+    <UppdateringsIntervall>60</UppdateringsIntervall>
+    <AntalAvsnitt>406</AntalAvsnitt>
+    <Namn>P3 Dokumentär</Namn>
+    <NextUpdate>2020-10-29T15:51:55.2324308+01:00</NextUpdate>
   </Podcast>
 </ArrayOfPodcast>

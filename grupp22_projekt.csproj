@@ -47,27 +47,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Avsnitt.cs" />
+    <Compile Include="KategoriValidation.cs" />
     <Compile Include="OurExceptions.cs" />
-    <Compile Include="PodcastController.cs" />
-    <Compile Include="PodcastRepository.cs" />
-    <Compile Include="DataManager.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="IKategoriRepository.cs" />
-    <Compile Include="IPodcastRepository.cs" />
-    <Compile Include="IRepository.cs" />
-    <Compile Include="Kategori.cs" />
-    <Compile Include="KategoriController.cs" />
-    <Compile Include="KategoriRepository.cs" />
-    <Compile Include="Podcast.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Validation.cs" />
+    <Compile Include="PodcastValidation.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -94,17 +84,17 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Binary Layer\Business Layer.csproj">
-      <Project>{5f971908-7feb-4fa3-8bad-817f1fa9e6f7}</Project>
-      <Name>Business Layer</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Models\Models.csproj">
-      <Project>{074b2eec-c3aa-4737-9305-1032539b8b2f}</Project>
-      <Name>Models</Name>
-    </ProjectReference>
+    <Content Include=".gitignore.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include=".gitignore.txt" />
+    <ProjectReference Include="BL\BL.csproj">
+      <Project>{cf9cdd40-d78e-4532-8876-9d7e3a674d59}</Project>
+      <Name>BL</Name>
+    </ProjectReference>
+    <ProjectReference Include="Models\Models.csproj">
+      <Project>{2083ddbd-5fb0-4496-b558-d19f57b61f2e}</Project>
+      <Name>Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

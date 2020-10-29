@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Xml;
 
 namespace Business_Layer
 {
@@ -16,7 +18,7 @@ namespace Business_Layer
         public OurExceptions(string message) :
             base (message)
         {
-            this.Message = "Felmeddelande";
+
         }
 
         public OurExceptions(string message, Exception inner) :
@@ -25,28 +27,44 @@ namespace Business_Layer
 
         }
 
-        public string Message { get; set; }
- 
-
-        private string Message1()
+        public virtual bool isInputEmpty(string input)
         {
-            return "Felmeddelande";
+            if (string.IsNullOrEmpty(input))
+            {
+                throw (new OurExceptions("Textrutan är tom"));
+            }
+            else
+            {
+                return false;
+            }
         }
 
-        //public bool NeedsUpdate
-        //{
-        //    get
-        //    {
-        //        // Om nästa uppdatering är innan nuvarande klockslag så ska en uppdatering ske
-        //        // dvs metoden NeedsUpdate ska returnera true
-        //        return NextUpdate <= DateTime.Now;
-        //    }
-        //}
-
-
-        public virtual string IsInputEmpty(string input)
+        public virtual bool isItemNull(ListBox listBox)
         {
-            return Message1();
+            if(listBox.SelectedItem == null)
+            {
+                throw (new OurExceptions("Inget item valt"));
+            }
+
+            return false;
         }
+
+        protected bool ValidationRSS(string URL)
+        {
+            try
+            {
+                new XmlDocument().Load(URL);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        
+
+
+
     }
 }
