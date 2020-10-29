@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Avsnitt.cs" />
+    <Compile Include="OurExceptions.cs" />
     <Compile Include="PodcastController.cs" />
     <Compile Include="PodcastRepository.cs" />
     <Compile Include="DataManager.cs" />

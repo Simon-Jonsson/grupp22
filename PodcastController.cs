@@ -26,6 +26,10 @@ namespace grupp22_projekt
             return podcastRepository.GetAll();
         }
 
+        public void UpdatePodcastList(List<Podcast> podcasts)
+        {
+            podcastRepository.UpdateList(podcasts);
+        }
         public void RemovePodcast(int index)
         {
             podcastRepository.Delete(index);

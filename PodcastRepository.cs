@@ -49,6 +49,11 @@ namespace grupp22_projekt
             dataManager.SerializePodcast(podcastLista);
         }
 
+        public void UpdateList(List<Podcast> podcasts)
+        {
+            SaveChanges();
+        }
+
         public void Update(int index, Podcast newEntity)
         {
             if (index >= 0)

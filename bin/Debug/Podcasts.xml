@@ -1,27 +1,19 @@
-<?xml version="1.0"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <ArrayOfPodcast xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Podcast>
-    <URL>https://api.sr.se/api/rss/pod/itunes/3966</URL>
+    <URL>https://feed.pod.space/filipandfredrik</URL>
+    <Kategori>Humor</Kategori>
+    <UppdateringsIntervall>30</UppdateringsIntervall>
+    <AntalAvsnitt>554</AntalAvsnitt>
+    <Namn>Filip och Fredrik</Namn>
+    <NextUpdate>2020-10-28T17:14:12.2122514+01:00</NextUpdate>
+  </Podcast>
+  <Podcast>
+    <URL>https://rss.acast.com/rattegangspodden</URL>
     <Kategori>Brott</Kategori>
     <UppdateringsIntervall>10</UppdateringsIntervall>
-    <AntalAvsnitt>405</AntalAvsnitt>
-    <Namn>P3 Dokumentär</Namn>
-    <NextUpdate>2020-10-28T12:24:30.1854203+01:00</NextUpdate>
-  </Podcast>
-  <Podcast>
-    <URL>https://api.sr.se/api/rss/pod/itunes/3966</URL>
-    <Kategori>Komedi</Kategori>
-    <UppdateringsIntervall>30</UppdateringsIntervall>
-    <AntalAvsnitt>405</AntalAvsnitt>
-    <Namn>Filip och frdrik</Namn>
-    <NextUpdate>2020-10-28T13:32:01.1761566+01:00</NextUpdate>
-  </Podcast>
-  <Podcast>
-    <URL>https://api.sr.se/api/rss/pod/itunes/3966</URL>
-    <Kategori>Komedi</Kategori>
-    <UppdateringsIntervall>30</UppdateringsIntervall>
-    <AntalAvsnitt>405</AntalAvsnitt>
-    <Namn>Test 3</Namn>
-    <NextUpdate>2020-10-28T13:40:47.565751+01:00</NextUpdate>
+    <AntalAvsnitt>80</AntalAvsnitt>
+    <Namn>Rättegångspodden</Namn>
+    <NextUpdate>2020-10-28T17:14:04.252582+01:00</NextUpdate>
   </Podcast>
 </ArrayOfPodcast>

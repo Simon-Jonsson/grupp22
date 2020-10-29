@@ -12,5 +12,6 @@ namespace grupp22_projekt
     {
         string GetUrl(int index);
         List<Podcast> GetAllByKategori(string kategori);
+        void UpdateList(List<Podcast> podcasts);
     }
 }

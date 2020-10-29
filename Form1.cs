@@ -17,17 +17,9 @@ namespace grupp22_projekt
 {
     public partial class Form_Podcast : Form
     {
-        private Timer timer1 = new Timer();
-        //Klassen Student definieras i en separat fil
-        // Addera till listan students två Student objekten. 
-        // Den första objektet har uppdateringsinterval av halv minut
-        // Den andra objektet har uppdateringsinterval av en minut
-        private List<Podcast> students = new List<Podcast>(); 
-        
-        //{
-        //    new Podcast("_URL", "_kategori", 10, 50, "_namn"),
-        //    new Podcast ("_URL2", "_kategori2", 20, 100, "_namn2")
-        //};
+        private Timer timer = new Timer();
+        private List<Podcast> podcastTimerList = new List<Podcast>(); 
+
 
         KategoriController kategoriController;
         PodcastController podcastController;
@@ -41,61 +33,45 @@ namespace grupp22_projekt
             podcastController = new PodcastController();
             validation = new Validation();
 
-            timer1.Interval = 1000;
-            // Koppla event handler Timer_Tick() som ska köras varje gång timern körs dvs varje sekund
-            // Tick är en event i klassen Timer som använder en inbyggd delegat EventHandler(object sender, EventArgs e); 
-            timer1.Tick += Timer1_Tick;
-            // starta timer
-            timer1.Start();
-
             Spara_Podcast.Enabled = false;
             textBox_URL.Enabled = true;
+
             VisaKategori();
             VisaPodcasts();
-            AddPodcastToTimer();
+            StartaTimer();
+            AddPodcastToTimerList();
         }
 
-        
-        private void Timer_Tick(object sender, EventArgs e)
+        private void StartaTimer()
         {
-            // loopa genom listan av studenter
-            foreach (var podcast in podcastController.GetAllPodcasts())
-            {
-                // kolla om student objekt behöver uppdateras
-                if (podcast.NeedsUpdate)
-                {
-                    // i så fall anroppa dess Update() och tilldela sträng värdet till en listbox
-                    listBox_Avsnitt.Items.Add(podcast.Update());
-                    listBox_Beskrivning.Items.Add(podcast.Namn + "\t" + podcast.UppdateringsIntervall);
-
-                }
-            }
-
+            timer.Interval = 1000;
+            timer.Tick += Timer_Tick;
+            timer.Start();
         }
-
-        private void AddPodcastToTimer()
+        private void AddPodcastToTimerList()
         {
             foreach (var item in podcastController.GetAllPodcasts())
             {
-                students.Add(item);
-            }
+                podcastTimerList.Add(item);
+            }         
         }
 
-        private void Timer1_Tick(object sender, EventArgs e)
+        private void Timer_Tick(object sender, EventArgs e)
         {
-
-            // loopa genom listan av studenter
-            foreach (var student in students)
-            {
-                // kolla om student objekt behöver uppdateras
-                if (student.NeedsUpdate)
+            foreach (var podcast in podcastTimerList)
+            {               
+                if (podcast.NeedsUpdate)
                 {
-                    // i så fall anroppa dess Update() och tilldela sträng värdet till en listbox
-                    listBox_Avsnitt.Items.Add(student.Update());
-                }
-            }
-
-            
+                    if(podcast.AntalAvsnitt != GetAntalAvsnitt(podcast.URL))
+                    {
+                        UpdatePodcastAvsnitt(podcast.URL);
+                        podcast.UpdateAntalAvsnitt(GetAntalAvsnitt(podcast.URL));
+                        ListView_Podcast.Items.Clear();
+                        VisaPodcasts();
+                    }
+                 
+                }  
+            }     
         }
 
         private void VisaPodcasts()
@@ -189,7 +165,7 @@ namespace grupp22_projekt
             }
             else
             {
-                MessageBox.Show("Ingen kategori vald");
+                listBox_Kategori.ClearSelected();
             }
             
 
@@ -322,7 +298,7 @@ namespace grupp22_projekt
 
             try
             {
-                var confirmResult = MessageBox.Show("Vill du ta bort denna kategori och tillhörande podcasts?", "Confirm Delete", MessageBoxButtons.YesNo);
+                var confirmResult = MessageBox.Show("Vill du ta bort denna podcast?", "Confirm Delete", MessageBoxButtons.YesNo);
                     
                 if (confirmResult == DialogResult.Yes)
                     {
@@ -381,6 +357,18 @@ namespace grupp22_projekt
             VisaPodcasts();
         }
 
+        private void UpdatePodcastAvsnitt(string URL)
+        {
+            XDocument document = XDocument.Load(("Podcasts.xml"));
+            var updateQuery = from r in document.Descendants("Podcast") where r.Element("URL").Value.Equals(URL) select r;
+            foreach (var query in updateQuery)
+            {
+                query.Element("AntalAvsnitt").SetValue(GetAntalAvsnitt(URL));
+            }
+            document.Save(("Podcasts.xml"));
+
+        }
+
         private void GetSorteradeKategorier(string valdKategori)
         {
             foreach (var item in podcastController.GetAllPodcastByKategori(valdKategori))
@@ -389,17 +377,28 @@ namespace grupp22_projekt
             }
         }
 
-        private List<String> GetPodcastAvsnitt()
+        private void GetPodcastAvsnitt()
+        {
+            XmlReader reader = XmlReader.Create(GetURL());
+            SyndicationFeed feed = SyndicationFeed.Load(reader);       
+
+            foreach (SyndicationItem item in feed.Items)
+            {
+                listBox_Avsnitt.Items.Add(item.Title.Text);
+            }
+
+        }
+
+        private List<String> GetAvsnittBeskrivning()
         {
             XmlReader reader = XmlReader.Create(GetURL());
             SyndicationFeed feed = SyndicationFeed.Load(reader);
 
             List<string> beskrivningar = new List<string>();
-            
+
 
             foreach (SyndicationItem item in feed.Items)
             {
-                listBox_Avsnitt.Items.Add(item.Title.Text);
                 beskrivningar.Add(item.Summary.Text);
             }
 
@@ -410,7 +409,7 @@ namespace grupp22_projekt
         {
             listBox_Beskrivning.Items.Clear();
 
-            List<string> allaAvsnitt = GetPodcastAvsnitt();
+            List<string> allaAvsnitt = GetAvsnittBeskrivning();
 
             int avsnittIndex = listBox_Avsnitt.SelectedIndex;
             avsnittLabel.Text = listBox_Avsnitt.SelectedItem.ToString();
@@ -431,23 +430,15 @@ namespace grupp22_projekt
             {
                 int uppdateringsFrekvens = int.Parse(comboBox_UF.SelectedItem.ToString());
                 if (validation.isInputEmpty(textBox_Namn.Text) == false)
-                {
-                    if (validation.isInputLetters(textBox_Namn.Text) == false)
-                    {
-                        MessageBox.Show("Namnet får endast innehålla bokstäver");
-                    }
-                    else
-                    {
+                {                   
                         Podcast ändraPodcast = new Podcast(textBox_URL.Text, comboBox_Kategori.SelectedItem.ToString(), uppdateringsFrekvens, GetAntalAvsnitt(textBox_URL.Text), textBox_Namn.Text);
                         int index = ListView_Podcast.SelectedIndices[0];
                         podcastController.ChangePodcast(index, ändraPodcast);
-                        ListView_Podcast.Items.Clear();
                         RensaNyPodcast();
                         VisaPodcasts();
                         MessageBox.Show("Ändringarna är sparade");
                         Spara_Podcast.Enabled = false;
                         textBox_URL.Enabled = true;
-                    }
                 }
                 else
                 {
@@ -462,13 +453,20 @@ namespace grupp22_projekt
 
         private void ListView_Podcast_MouseClick(object sender, MouseEventArgs e)
         {
-            textBox_Namn.Text = ListView_Podcast.SelectedItems[0].SubItems[1].Text;
-            comboBox_UF.Text = ListView_Podcast.SelectedItems[0].SubItems[2].Text;
-            comboBox_Kategori.Text = ListView_Podcast.SelectedItems[0].SubItems[3].Text;
-            textBox_URL.Enabled = false;
-            Spara_Podcast.Enabled = true;
-            string urlText = GetURL();
-            textBox_URL.Text = urlText;
+            try
+            {
+                textBox_Namn.Text = ListView_Podcast.SelectedItems[0].SubItems[1].Text;
+                comboBox_UF.Text = ListView_Podcast.SelectedItems[0].SubItems[2].Text;
+                comboBox_Kategori.Text = ListView_Podcast.SelectedItems[0].SubItems[3].Text;
+                textBox_URL.Enabled = false;
+                Spara_Podcast.Enabled = true;
+                string urlText = GetURL();
+                textBox_URL.Text = urlText;
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void Sortera_Kategori_Click(object sender, EventArgs e)

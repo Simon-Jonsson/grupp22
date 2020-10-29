@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Business_Layer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace grupp22_projekt
 {
-    public class Validation
+    public class Validation : OurExceptions
     {
         public virtual bool isInputLetters(string input)
         {
@@ -30,6 +31,16 @@ namespace grupp22_projekt
             {
                 return false;
             }
+        }
+
+        public override string IsInputEmpty(OurExceptions ex, string input)
+        {
+            if (isInputEmpty(input) == true)
+            {
+                return "Texten är tom";
+            }
+
+            return IsInputEmpty(ex, input);
         }
     }
 }
