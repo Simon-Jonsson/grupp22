@@ -378,7 +378,7 @@ namespace grupp22_projekt
             var updateQuery = from r in document.Descendants("Podcast") where r.Element("URL").Value.Equals(URL) select r;
             foreach (var item in updateQuery)
             {
-                item.Element("AntalAvsnitt").SetValue(GetNumberOfEpisodes(URL));
+                item.Element("NumberOfEpisodes").SetValue(GetNumberOfEpisodes(URL));
             }
             document.Save(("Podcasts.xml"));
 
