@@ -6,18 +6,18 @@ namespace Models
     {
         public string URL { get; set; }
         public string Kategori { get; set; }
-        public int UppdateringsIntervall { get; set; }
-        public int AntalAvsnitt { get; set; }
-        public string Namn { get; set; }
+        public int UpdateFrequency { get; set; }
+        public int NumberOfEpisodes { get; set; }
+        public string Name { get; set; }
         public DateTime NextUpdate { get; set; }
 
         public Podcast(string _URL, string _kategori, int _uppdateringsIntervall, int _antalAvsnitt, string _namn)
         {
             URL = _URL;
             Kategori = _kategori;
-            UppdateringsIntervall = _uppdateringsIntervall;
-            AntalAvsnitt = _antalAvsnitt;
-            Namn = _namn;
+            UpdateFrequency = _uppdateringsIntervall;
+            NumberOfEpisodes = _antalAvsnitt;
+            Name = _namn;
             Update();
         }
 
@@ -31,15 +31,15 @@ namespace Models
         }
 
         //Uppdaterar värdet för antalet avsnitt
-        public void UpdateAntalAvsnitt(int antalAvsnitt)
+        public void UpdateNumberOfEpisodes(int numberOfEpisodes)
         {
-            AntalAvsnitt = antalAvsnitt;
+            NumberOfEpisodes = numberOfEpisodes;
         }
 
         //Sätter tidsintervallet för hur ofta podcasten ska uppdateras
         private void Update()
         {
-            NextUpdate = DateTime.Now.AddSeconds(UppdateringsIntervall);
+            NextUpdate = DateTime.Now.AddSeconds(UpdateFrequency);
         }
 
         //En tom konstruktor så att man kan serializera/ desarializera

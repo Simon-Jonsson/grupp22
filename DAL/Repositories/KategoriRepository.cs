@@ -10,27 +10,31 @@ namespace DAL.Repositories
     public class KategoriRepository : IKategoriRepository<Kategori>
     {
 
-        List<Kategori> kategoriLista;
+        List<Kategori> kategoriList;
         DataManager dataManager;
 
         public KategoriRepository()
         {
-            kategoriLista = new List<Kategori>();
+            kategoriList = new List<Kategori>();
             dataManager = new DataManager();
-            kategoriLista = GetAll();
+            kategoriList = GetAll();
         }
+
+        //Lägger till en kategori i XML-filen
         public void Create(Kategori entity)
         {
-            kategoriLista.Add(entity);
+            kategoriList.Add(entity);
             SaveChanges();
         }
 
+        //Tar bort en kategori från XML-filen
         public void Delete(int index)
         {
-            kategoriLista.RemoveAt(index);
+            kategoriList.RemoveAt(index);
             SaveChanges();
         }
 
+        //Hämtar alla kategorier i XML-filen
         public List<Kategori> GetAll()
         {
             List<Kategori> kategoriListToBeReturned = new List<Kategori>();
@@ -38,21 +42,24 @@ namespace DAL.Repositories
             return kategoriListToBeReturned;
         }
 
+        //Hämtar en kategori med ett visst namn från XML-filen
         public Kategori GetByName(string name)
         {
-            return GetAll().First(p => p.Namn.Equals(name));
+            return GetAll().First(p => p.Name.Equals(name));
         }
 
+        //Sparar alla ändringar i XML-filen
         public void SaveChanges()
         {
-            dataManager.SerializeKategori(kategoriLista);
+            dataManager.SerializeKategori(kategoriList);
         }
 
+        //Uppdaterar en kategori mot en ny i XML-filen
         public void Update(int index, Kategori newEntity)
         {
             if (index >= 0)
             {
-                kategoriLista[index] = newEntity;
+                kategoriList[index] = newEntity;
             }
             SaveChanges();
         }

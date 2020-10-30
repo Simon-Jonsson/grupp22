@@ -11,27 +11,31 @@ namespace DAL.Repositories
     public class PodcastRepository : IPodcastRepository<Podcast>
 
     {
-        List<Podcast> podcastLista;
+        List<Podcast> podcastList;
         DataManager dataManager;
 
         public PodcastRepository()
         {
-            podcastLista = new List<Podcast>();
+            podcastList = new List<Podcast>();
             dataManager = new DataManager();
-            podcastLista = GetAll();
+            podcastList = GetAll();
         }
+
+        //Lägger till en podcast i XML-filen
         public void Create(Podcast entity)
         {
-            podcastLista.Add(entity);
+            podcastList.Add(entity);
             SaveChanges();
         }
 
+        //Tar bort en podcast från XML-filen
         public void Delete(int index)
         {
-            podcastLista.RemoveAt(index);
+            podcastList.RemoveAt(index);
             SaveChanges();
         }
 
+        //Hämtar alla podcasts i XML-filen
         public List<Podcast> GetAll()
         {
             List<Podcast> podcastListToBeReturned = new List<Podcast>();
@@ -39,33 +43,32 @@ namespace DAL.Repositories
             return podcastListToBeReturned;
         }
 
+        //Hämtar alla podcasts med en viss kategori från XML-filen
         public List<Podcast> GetAllByKategori(string kategori)
         {
             return GetAll().FindAll(p => p.Kategori.Equals(kategori));
         }
 
+        //Sparar alla ändringar i XML-filen
         public void SaveChanges()
         {
-            dataManager.SerializePodcast(podcastLista);
+            dataManager.SerializePodcast(podcastList);
         }
 
-        public void UpdateList(List<Podcast> podcasts)
-        {
-            SaveChanges();
-        }
-
+        //Uppdaterar en podcast mot en ny i XML-filen
         public void Update(int index, Podcast newEntity)
         {
             if (index >= 0)
             {
-                podcastLista[index] = newEntity;
+                podcastList[index] = newEntity;
             }
             SaveChanges();
         }
 
+        //Hämtar URLen för en podcast i XML-filen
         public string GetUrl(int index)
         {
-            return podcastLista[index].URL;
+            return podcastList[index].URL;
         }
 
     }

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 namespace BL
 {
+    //Hela klassen förmedlar information mellan presentationslagret och datalagret
     public class KategoriController
     {
         IKategoriRepository<Kategori> kategoriRepository;
@@ -14,12 +15,12 @@ namespace BL
             kategoriRepository = new KategoriRepository();
         }
 
-        public void CreateKategori(string namn)
+        public void CreateKategori(string name)
         {
-            Kategori nyKategori = null;
+            Kategori newKategori = null;
 
-            nyKategori = new Kategori(namn);
-            kategoriRepository.Create(nyKategori);
+            newKategori = new Kategori(name);
+            kategoriRepository.Create(newKategori);
 
         }
 
@@ -28,11 +29,11 @@ namespace BL
             return kategoriRepository.GetAll();
         }
 
-        public string GetKategoriByName(string namn)
+        public string GetKategoriByName(string name)
         {
             Kategori kategori;
-            kategori = kategoriRepository.GetByName(namn);
-            return kategori.Namn;
+            kategori = kategoriRepository.GetByName(name);
+            return kategori.Name;
         }
 
         public void RemoveKategori(int index)
@@ -40,9 +41,9 @@ namespace BL
             kategoriRepository.Delete(index);
         }
 
-        public void ChangeKategori(int index, Kategori uppdateraKategori)
+        public void ChangeKategori(int index, Kategori updateKategori)
         {
-            kategoriRepository.Update(index, uppdateraKategori);
+            kategoriRepository.Update(index, updateKategori);
         }
     }
 }

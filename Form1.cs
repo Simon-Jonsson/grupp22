@@ -69,10 +69,10 @@ namespace grupp22_projekt
             {               
                 if (podcast.NeedsUpdate)
                 {
-                    if(podcast.AntalAvsnitt != GetAntalAvsnitt(podcast.URL))
+                    if(podcast.NumberOfEpisodes != GetNumberOfEpisodes(podcast.URL))
                     {
-                        UpdatePodcastAvsnitt(podcast.URL);
-                        podcast.UpdateAntalAvsnitt(GetAntalAvsnitt(podcast.URL));
+                        UpdatePodcastEpisodes(podcast.URL);
+                        podcast.UpdateNumberOfEpisodes(GetNumberOfEpisodes(podcast.URL));
                         ListView_Podcast.Items.Clear();
                         ShowPodcasts();
                     }
@@ -92,9 +92,9 @@ namespace grupp22_projekt
                     string[] podcasts = new string[4];
                     ListViewItem listView;
 
-                    podcasts[0] = item.AntalAvsnitt.ToString();
-                    podcasts[1] = item.Namn;
-                    podcasts[2] = item.UppdateringsIntervall.ToString();
+                    podcasts[0] = item.NumberOfEpisodes.ToString();
+                    podcasts[1] = item.Name;
+                    podcasts[2] = item.UpdateFrequency.ToString();
                     podcasts[3] = item.Kategori;
                     listView = new ListViewItem(podcasts);
                     ListView_Podcast.Items.Add(listView);
@@ -109,7 +109,7 @@ namespace grupp22_projekt
             {
                 if (item != null)
                 {
-                    listBox_Kategori.Items.Add(item.Namn);
+                    listBox_Kategori.Items.Add(item.Name);
                 }
             }
             FillKategoriCombobox();
@@ -123,7 +123,7 @@ namespace grupp22_projekt
             {
                 if (item != null)
                 {
-                    comboBox_Kategori.Items.Add(item.Namn);
+                    comboBox_Kategori.Items.Add(item.Name);
                 }
             }
         }
@@ -262,10 +262,11 @@ namespace grupp22_projekt
                         {
                             if (podcastValidation.isKategoriEmpty(comboBox_Kategori) == false)
                             {
-                                int uppdateringsFrekvens = int.Parse(comboBox_UF.SelectedItem.ToString());
-                                podcastController.CreatePodcast(textBox_URL.Text, comboBox_Kategori.SelectedItem.ToString(), uppdateringsFrekvens, GetAntalAvsnitt(textBox_URL.Text), textBox_Namn.Text);
+                                int updateFrequency = int.Parse(comboBox_UF.SelectedItem.ToString());
+                                podcastController.CreatePodcast(textBox_URL.Text, comboBox_Kategori.SelectedItem.ToString(), updateFrequency, GetNumberOfEpisodes(textBox_URL.Text), textBox_Namn.Text);
                                 ClearNewPodcastFields();
                                 ShowPodcasts();
+
                                 Spara_Podcast.Enabled = false;
                                 button_Visa.Enabled = false;
                                 textBox_URL.Enabled = true;
@@ -280,10 +281,11 @@ namespace grupp22_projekt
             }
         }
 
-        private int GetAntalAvsnitt(string URL)
+        //Hämtar antalet avsnitt på en podcast från en URL
+        private int GetNumberOfEpisodes(string URL)
 
         {
-            int antalAvsnitt = 0;
+            int numberOfEpisodes = 0;
             try
             {
                 if (podcastValidation.isNotValidURL(URL) == false)
@@ -293,7 +295,7 @@ namespace grupp22_projekt
 
                     foreach (var item in feed.Items)
                     {
-                        antalAvsnitt++;
+                        numberOfEpisodes++;
                     }
                 }
 
@@ -303,9 +305,10 @@ namespace grupp22_projekt
                 MessageBox.Show(ex.Message);
             }
 
-            return antalAvsnitt;
+            return numberOfEpisodes;
         }
 
+        //Tar bort en podcast
         private void TaBort_Podcast_Click(object sender, EventArgs e)
         {
 
@@ -318,8 +321,10 @@ namespace grupp22_projekt
                     {
                         var index = ListView_Podcast.SelectedIndices;
                         podcastController.RemovePodcast(index[0]);
+
                         ClearNewPodcastFields();
                         ShowPodcasts();
+
                         Spara_Podcast.Enabled = false;
                         button_Visa.Enabled = false;
                         textBox_URL.Enabled = true;
@@ -337,11 +342,13 @@ namespace grupp22_projekt
             }
         }
 
+        //Visar alla avsnitt för en podcast
         private void button_Visa_Click(object sender, EventArgs e)
         {
-            GetPodcastAvsnitt();
+            GetPodcastEpisodes();
         }
 
+        //Hämtar URLen för en podcast från våran XML fil
         private string GetURL()
         {
 
@@ -351,89 +358,96 @@ namespace grupp22_projekt
 
         }
 
-        private void ChangePodcastKategori(string valdKategori)
+        //Byter kategorin på alla podcasts med den valda kategorin
+        private void ChangePodcastKategori(string selectedKategori)
         {
             XDocument document = XDocument.Load(("Podcasts.xml"));
-            var updateQuery = from r in document.Descendants("Podcast") where r.Element("Kategori").Value.Equals(valdKategori) select r;
-            foreach (var query in updateQuery)
+            var updateQuery = from r in document.Descendants("Podcast") where r.Element("Kategori").Value.Equals(selectedKategori) select r;
+            foreach (var item in updateQuery)
             {
-                query.Element("Kategori").SetValue(textBox_NyKategori.Text);
+                item.Element("Kategori").SetValue(textBox_NyKategori.Text);
             }
             document.Save(("Podcasts.xml"));
             ShowPodcasts();
         }
 
-        private void UpdatePodcastAvsnitt(string URL)
+        //Uppdaterar antalet avsnitt för en podcast-URL
+        private void UpdatePodcastEpisodes(string URL)
         {
             XDocument document = XDocument.Load(("Podcasts.xml"));
             var updateQuery = from r in document.Descendants("Podcast") where r.Element("URL").Value.Equals(URL) select r;
-            foreach (var query in updateQuery)
+            foreach (var item in updateQuery)
             {
-                query.Element("AntalAvsnitt").SetValue(GetAntalAvsnitt(URL));
+                item.Element("AntalAvsnitt").SetValue(GetNumberOfEpisodes(URL));
             }
             document.Save(("Podcasts.xml"));
 
         }
 
-        private void GetSorteradeKategorier(string valdKategori)
+        //Hämtar alla podcast med den valda kategorin
+        private void GetSortedKategorier(string selectedKategori)
         {
-            foreach (var item in podcastController.GetAllPodcastByKategori(valdKategori))
+            foreach (var item in podcastController.GetAllPodcastByKategori(selectedKategori))
             {
-                listBox_SorteradeKategorier.Items.Add(item.Namn);
+                listBox_SorteradeKategorier.Items.Add(item.Name);
             }
         }
 
-        private async Task GetPodcastAvsnitt()
+        //Hämtar alla avsnitt för den valda podcasten
+        private async Task GetPodcastEpisodes()
         {
             XmlReader reader = XmlReader.Create(GetURL());
             SyndicationFeed feed = await Task.Run(() => SyndicationFeed.Load(reader));
 
-            foreach (SyndicationItem item in feed.Items)
+            foreach (var item in feed.Items)
             {
                 listBox_Avsnitt.Items.Add(item.Title.Text);
             }
 
         }
 
-        private List<String> GetAvsnittBeskrivning()
+        //Returnerar en lista med alla avsnitts-beskrivningar
+        private List<String> GetEpisodeDescription()
         {
             XmlReader reader = XmlReader.Create(GetURL());
             SyndicationFeed feed = SyndicationFeed.Load(reader);
 
-            List<string> beskrivningar = new List<string>();
+            List<string> descriptions = new List<string>();
 
-            foreach (SyndicationItem item in feed.Items)
+            foreach (var item in feed.Items)
             {
-                beskrivningar.Add(item.Summary.Text);
+                descriptions.Add(item.Summary.Text);
             }
 
-            return beskrivningar;
+            return descriptions;
         }
 
+        //Visar beskrivningen för det avsnittet du har valt
         private void listBox_Avsnitt_SelectedIndexChanged(object sender, EventArgs e)
         {
             listBox_Beskrivning.Items.Clear();
 
-            List<string> allaAvsnitt = GetAvsnittBeskrivning();
+            List<string> allEpisodes = GetEpisodeDescription();
 
-            int avsnittIndex = listBox_Avsnitt.SelectedIndex;
+            int episodeIndex = listBox_Avsnitt.SelectedIndex;
             avsnittLabel.Text = listBox_Avsnitt.SelectedItem.ToString();
 
-            for (int i = 0; i < allaAvsnitt.Count; i++)
+            for (int i = 0; i < allEpisodes.Count; i++)
             {
-                if (i == avsnittIndex)
+                if (i == episodeIndex)
                 {
-                    listBox_Beskrivning.Items.Add(allaAvsnitt[avsnittIndex]);
+                    listBox_Beskrivning.Items.Add(allEpisodes[episodeIndex]);
                 }
             }
 
         }
 
+        //Sparar ändringarna för en podcast
         private void Spara_Podcast_Click(object sender, EventArgs e)
         {
             try
             {
-                int uppdateringsFrekvens = int.Parse(comboBox_UF.SelectedItem.ToString());
+                int updateFrequency = int.Parse(comboBox_UF.SelectedItem.ToString());
                 if (podcastValidation.isInputEmpty(textBox_Namn.Text) == false)
                 {
                     if (podcastValidation.isNotValidURL(textBox_URL.Text) == false)
@@ -442,12 +456,15 @@ namespace grupp22_projekt
                         {
                             if (podcastValidation.isKategoriEmpty(comboBox_Kategori) == false)
                             {
-                                Podcast ändraPodcast = new Podcast(textBox_URL.Text, comboBox_Kategori.SelectedItem.ToString(), uppdateringsFrekvens, GetAntalAvsnitt(textBox_URL.Text), textBox_Namn.Text);
+                                Podcast changePodcast = new Podcast(textBox_URL.Text, comboBox_Kategori.SelectedItem.ToString(), updateFrequency, GetNumberOfEpisodes(textBox_URL.Text), textBox_Namn.Text);
                                 int index = ListView_Podcast.SelectedIndices[0];
-                                podcastController.ChangePodcast(index, ändraPodcast);
+                                podcastController.ChangePodcast(index, changePodcast);
+
                                 ClearNewPodcastFields();
                                 ShowPodcasts();
+
                                 MessageBox.Show("Ändringarna är sparade");
+
                                 Spara_Podcast.Enabled = false;
                                 button_Visa.Enabled = false;
                                 textBox_URL.Enabled = true;
@@ -462,21 +479,26 @@ namespace grupp22_projekt
             }
         }
 
+        //När man klickar på en podcast visas dens information upp i textfälten och comboboxes
         private void ListView_Podcast_MouseClick(object sender, MouseEventArgs e)
         {
                 textBox_Namn.Text = ListView_Podcast.SelectedItems[0].SubItems[1].Text;
                 comboBox_UF.Text = ListView_Podcast.SelectedItems[0].SubItems[2].Text;
                 comboBox_Kategori.Text = ListView_Podcast.SelectedItems[0].SubItems[3].Text;
+
                 textBox_URL.Enabled = false;
                 Spara_Podcast.Enabled = true;
                 button_Visa.Enabled = true;
+
                 listBox_Avsnitt.Items.Clear();
                 listBox_Beskrivning.Items.Clear();
                 avsnittLabel.Text = "Avsnitt";
+
                 string urlText = GetURL();
                 textBox_URL.Text = urlText;
         }
 
+        //Sorterar kategorierna utifrån det värde man skrev in i textfältet
         private void Sortera_Kategori_Click(object sender, EventArgs e)
         {
             try
@@ -484,7 +506,7 @@ namespace grupp22_projekt
                 listBox_SorteradeKategorier.Items.Clear();
                 if (kategoriValidation.isItemNull(listBox_Kategori) == false) 
                 {
-                    GetSorteradeKategorier(listBox_Kategori.SelectedItem.ToString());
+                    GetSortedKategorier(listBox_Kategori.SelectedItem.ToString());
                     textBox_NyKategori.Clear();
                     listBox_Kategori.ClearSelected();
                 } 

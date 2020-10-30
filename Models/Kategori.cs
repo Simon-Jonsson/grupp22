@@ -6,11 +6,11 @@ namespace Models
 {
     public class Kategori
     {
-        public string Namn { get; set; }
+        public string Name { get; set; }
 
-        public Kategori (string _namn)
+        public Kategori (string _name)
         {
-            Namn = _namn;
+            Name = _name;
 
         }
 

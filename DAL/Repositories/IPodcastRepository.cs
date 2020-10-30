@@ -11,6 +11,5 @@ namespace DAL.Repositories
     {
         string GetUrl(int index);
         List<Podcast> GetAllByKategori(string kategori);
-        void UpdateList(List<Podcast> podcasts);
     }
 }

@@ -2,12 +2,10 @@
 using Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BL
 {
+    //Hela klassen förmedlar information mellan presentationslagret och datalagret
     public class PodcastController
     {
 
@@ -18,20 +16,16 @@ namespace BL
             podcastRepository = new PodcastRepository();
         }
 
-        public void CreatePodcast(string _URL, string _kategori, int _uppdateringsIntervall, int _antalAvsnitt, string _namn)
+        public void CreatePodcast(string _URL, string _kategori, int _updateFrequency, int _numberOfEpisodes, string _name)
         {
-            Podcast nyPodcast = new Podcast(_URL, _kategori, _uppdateringsIntervall, _antalAvsnitt, _namn);
-            podcastRepository.Create(nyPodcast);
+            Podcast newPodcast = new Podcast(_URL, _kategori, _updateFrequency, _numberOfEpisodes, _name);
+            podcastRepository.Create(newPodcast);
         }
         public List<Podcast> GetAllPodcasts()
         {
             return podcastRepository.GetAll();
         }
 
-        public void UpdatePodcastList(List<Podcast> podcasts)
-        {
-            podcastRepository.UpdateList(podcasts);
-        }
         public void RemovePodcast(int index)
         {
             podcastRepository.Delete(index);
@@ -46,9 +40,9 @@ namespace BL
             return podcastRepository.GetAllByKategori(kategori);
         }
 
-        public void ChangePodcast(int index, Podcast uppdateraPodcast)
+        public void ChangePodcast(int index, Podcast updatePodcast)
         {
-            podcastRepository.Update(index, uppdateraPodcast);
+            podcastRepository.Update(index, updatePodcast);
         }
     }
 }

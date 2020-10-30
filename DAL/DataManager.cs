@@ -9,7 +9,7 @@ namespace DAL
 {
     internal class DataManager
     {
-
+        //Serializerar podcasts
         public void SerializePodcast(List<Podcast> podcastList)
         {
             XmlSerializer xmlSerializer = new XmlSerializer(podcastList.GetType());
@@ -20,6 +20,7 @@ namespace DAL
             }
         }
 
+        //Deserializerar podcasts
         public List<Podcast> DeserializePodcast()
         {
             List<Podcast> listOfPodcastsToBeReturned;
@@ -33,6 +34,7 @@ namespace DAL
             return listOfPodcastsToBeReturned;
         }
 
+        //Serializerar kategorier
         public void SerializeKategori(List<Kategori> kategoriList)
         {
             XmlSerializer xmlSerializer = new XmlSerializer(kategoriList.GetType());
@@ -43,6 +45,7 @@ namespace DAL
             }
         }
 
+        //Deserializerar kategorier
         public List<Kategori> DeserializeKategori()
         {
             List<Kategori> listOfKategorierToBeReturned;
