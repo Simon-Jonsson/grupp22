@@ -343,9 +343,9 @@ namespace grupp22_projekt
         }
 
         //Visar alla avsnitt för en podcast
-        private void button_Visa_Click(object sender, EventArgs e)
+        private async void button_Visa_ClickAsync(object sender, EventArgs e)
         {
-            GetPodcastEpisodes();
+            await GetPodcastEpisodes();
         }
 
         //Hämtar URLen för en podcast från våran XML fil

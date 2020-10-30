@@ -281,7 +281,7 @@
             this.button_Visa.TabIndex = 21;
             this.button_Visa.Text = "Visa";
             this.button_Visa.UseVisualStyleBackColor = true;
-            this.button_Visa.Click += new System.EventHandler(this.button_Visa_Click);
+            this.button_Visa.Click += new System.EventHandler(this.button_Visa_ClickAsync);
             // 
             // listBox_Beskrivning
             // 
