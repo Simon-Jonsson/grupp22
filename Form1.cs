@@ -200,9 +200,10 @@ namespace grupp22_projekt
                         {
                             Kategori changeKategori = new Kategori(textBox_NyKategori.Text);
                             int index = listBox_Kategori.SelectedIndex;
+                            string selectedKategori = listBox_Kategori.SelectedItem.ToString();
                             kategoriController.ChangeKategori(index, changeKategori);
                             listBox_Kategori.Items.Clear();
-                            ChangePodcastKategori(listBox_Kategori.SelectedItem.ToString());
+                            ChangePodcastKategori(selectedKategori);
                             ShowKategori();
                             ClearNewPodcastFields();
                             ShowPodcasts();
@@ -230,7 +231,8 @@ namespace grupp22_projekt
                     var confirmResult = MessageBox.Show("Vill du ta bort denna kategori och tillhörande podcasts?", "Är du säker?", MessageBoxButtons.YesNo);
                     if (confirmResult == DialogResult.Yes)
                     {
-                        DeletePodcastWithKategori(listBox_Kategori.SelectedItem.ToString());
+                        string selectedKategori = listBox_Kategori.SelectedItem.ToString();
+                        DeletePodcastWithKategori(selectedKategori);
                         kategoriController.RemoveKategori(listBox_Kategori.SelectedIndex);
                         listBox_Kategori.Items.Clear();
                         textBox_NyKategori.Clear();
