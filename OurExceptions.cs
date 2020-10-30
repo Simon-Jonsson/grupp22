@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
 
-namespace Business_Layer
+namespace grupp22_projekt
 {
     public class OurExceptions : Exception
     {
@@ -27,6 +27,7 @@ namespace Business_Layer
 
         }
 
+        //Virtual-metod som vi skriver över i våra valideringsklasser
         public virtual bool isInputEmpty(string input)
         {
             if (string.IsNullOrEmpty(input))
@@ -39,6 +40,7 @@ namespace Business_Layer
             }
         }
 
+        //Virtual-metod som vi skriver över i våra valideringsklasser
         public virtual bool isItemNull(ListBox listBox)
         {
             if(listBox.SelectedItem == null)
@@ -49,6 +51,7 @@ namespace Business_Layer
             return false;
         }
 
+        //Kollar ifall man kan ladda URLen för denna RSS feed. Går inte det är det inte en RSS feed och returnerar false, annars true
         protected bool ValidationRSS(string URL)
         {
             try

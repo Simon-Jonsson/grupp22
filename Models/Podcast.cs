@@ -21,6 +21,7 @@ namespace Models
             Update();
         }
 
+        //Kollar ifall det är dags att uppdatera podcasten
         public bool NeedsUpdate
         {
             get
@@ -29,17 +30,19 @@ namespace Models
             }
         }
 
+        //Uppdaterar värdet för antalet avsnitt
         public void UpdateAntalAvsnitt(int antalAvsnitt)
         {
             AntalAvsnitt = antalAvsnitt;
         }
 
-        public string Update()
+        //Sätter tidsintervallet för hur ofta podcasten ska uppdateras
+        private void Update()
         {
             NextUpdate = DateTime.Now.AddSeconds(UppdateringsIntervall);
-            return Namn + "'s Update() was invoked. Next update is at " + NextUpdate;
         }
 
+        //En tom konstruktor så att man kan serializera/ desarializera
         public Podcast()
         {
 

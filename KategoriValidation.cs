@@ -1,5 +1,4 @@
-﻿using Business_Layer;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +10,7 @@ namespace grupp22_projekt
     public class KategoriValidation : OurExceptions
     { 
 
+        //Kollar ifall kategorinamnet är tomt
         public override bool isInputEmpty(string input)
         {
             if (string.IsNullOrEmpty(input))
@@ -23,6 +23,7 @@ namespace grupp22_projekt
             }
         }
 
+        //Kollar så att man har klickat på en kategori som finns i våran lista
         public override bool isItemNull(ListBox listBox)
         {
             if (listBox.SelectedItem == null)
@@ -33,6 +34,7 @@ namespace grupp22_projekt
             return false;
         }
 
+        //Kollar så att inputen endast består av bokstäver
         public bool isInputLetters(string input)
         {
             for (int i = 0; i < input.Length; i++)

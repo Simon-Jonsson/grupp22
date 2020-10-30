@@ -14,6 +14,7 @@ namespace Models
 
         }
 
+        //En tom konstruktor så att man kan serializera/ desarializera
         public Kategori()
         {
 

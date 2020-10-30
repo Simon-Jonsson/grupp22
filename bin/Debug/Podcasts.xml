@@ -1,10 +1,10 @@
-<?xml version="1.0"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <ArrayOfPodcast xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Podcast>
     <URL>https://feed.pod.space/filipandfredrik</URL>
     <Kategori>Komedi</Kategori>
     <UppdateringsIntervall>30</UppdateringsIntervall>
-    <AntalAvsnitt>554</AntalAvsnitt>
+    <AntalAvsnitt>555</AntalAvsnitt>
     <Namn>Filip och Fredrik</Namn>
     <NextUpdate>2020-10-28T17:14:12.2122514+01:00</NextUpdate>
   </Podcast>

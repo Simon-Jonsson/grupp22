@@ -1,5 +1,4 @@
-﻿using Business_Layer;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,7 +11,7 @@ namespace grupp22_projekt
     {
 
        
-
+        //Kollar ifall podcastnamnet är tomt
         public override bool isInputEmpty(string input)
         {
             if (string.IsNullOrEmpty(input))
@@ -25,6 +24,7 @@ namespace grupp22_projekt
             }
         }
 
+        //Kollar ifall det är en giltig RSS-URL och throwar fel ifall den inte är giltig
         public bool isNotValidURL(string URL)
         {
             if (ValidationRSS(URL) == false)
@@ -34,6 +34,7 @@ namespace grupp22_projekt
             return false;
         }
 
+        //Kollar ifall uppdateringsfrekvens-comboxbox är empty och throwar fel isåfall
         public bool isUppdateringsFrekvensEmpty(ComboBox comboBox)
         {
             if (comboBox.SelectedItem == null)
@@ -43,6 +44,7 @@ namespace grupp22_projekt
             return false;
         }
 
+        //Kollar ifall kategori-comboxbox är empty och throwar fel isåfall
         public bool isKategoriEmpty(ComboBox comboBox)
         {
             if (comboBox.SelectedItem == null)
