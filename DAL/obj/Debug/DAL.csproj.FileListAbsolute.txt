@@ -16,12 +16,3 @@ C:\Users\ifkli\OneDrive\Dokument\GitHub\grupp22\DAL\obj\Debug\DAL.csproj.CoreCom
 C:\Users\ifkli\OneDrive\Dokument\GitHub\grupp22\DAL\obj\Debug\DAL.csproj.CopyComplete
 C:\Users\ifkli\OneDrive\Dokument\GitHub\grupp22\DAL\obj\Debug\DAL.dll
 C:\Users\ifkli\OneDrive\Dokument\GitHub\grupp22\DAL\obj\Debug\DAL.pdb
-C:\Users\SimonJonsson\Documents\GitHub\grupp22\DAL\bin\Debug\DAL.dll
-C:\Users\SimonJonsson\Documents\GitHub\grupp22\DAL\bin\Debug\DAL.pdb
-C:\Users\SimonJonsson\Documents\GitHub\grupp22\DAL\bin\Debug\Models.dll
-C:\Users\SimonJonsson\Documents\GitHub\grupp22\DAL\bin\Debug\Models.pdb
-C:\Users\SimonJonsson\Documents\GitHub\grupp22\DAL\obj\Debug\DAL.csproj.AssemblyReference.cache
-C:\Users\SimonJonsson\Documents\GitHub\grupp22\DAL\obj\Debug\DAL.csproj.CoreCompileInputs.cache
-C:\Users\SimonJonsson\Documents\GitHub\grupp22\DAL\obj\Debug\DAL.csproj.CopyComplete
-C:\Users\SimonJonsson\Documents\GitHub\grupp22\DAL\obj\Debug\DAL.dll
-C:\Users\SimonJonsson\Documents\GitHub\grupp22\DAL\obj\Debug\DAL.pdb
